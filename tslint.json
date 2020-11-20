@@ -1,0 +1,30 @@
+{
+  "defaultSeverity": "error",
+  "extend": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "linterOptions": {
+    "exclude": ["config/**/*.js", "node_modules/**/*.ts"]
+  },
+  "rules": {
+    "array-type": false,
+    "await-promise": true,
+    "class-name": true,
+    "curly": true,
+    "interface-name": true,
+    "member-access": true,
+    "no-any": false,
+    "no-bitwise": false,
+    "no-conditional-assignment": true,
+    "no-console": false,
+    "no-empty": true,
+    "no-empty-interface": true,
+    "no-magic-numbers": false,
+    "no-parameter-reassignment": true,
+    "no-shadowed-variable": false,
+    "no-string-literal": false,
+    "no-var-keyword": true,
+    "ordered-imports": false,
+    "object-literal-sort-keys": false,
+    "jsx-boolean-value": false,
+    "jsx-no-lambda": false
+  }
+}
