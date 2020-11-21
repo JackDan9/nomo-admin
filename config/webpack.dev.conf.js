@@ -2,18 +2,21 @@ const path = require('path');
 const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.base.conf');
 const webpack = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = merge(baseWebpackConfig, {
   mode: 'development',
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new MiniCssExtractPlugin()
   ],
   devServer: {
     contentBase: path.resolve(__dirname, '../dist'),
     compress: true,
-    port: 6666,
+    host: '0.0.0.0',
+    port: 8080,
     open: true,
-    hot: false,
+    hot: true,
     overlay: true
   },
   module: {
@@ -29,9 +32,10 @@ module.exports = merge(baseWebpackConfig, {
           'css-loader',
           {
             loader: 'less-loader',
-            // options: {
-            //   javascriptEnabled: true
-            // }
+            options: {
+              javascriptEnabled: true,
+              modules: true
+            }
           },
           // {
           //   loader: 'sass-resources-loader',

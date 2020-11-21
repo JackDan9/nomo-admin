@@ -12,14 +12,14 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "lib": ["ESNext", "DOM"],
-    "module": "ESNext",
+    "lib": ["esnext", "dom"],
+    "module": "esnext",
     "moduleResolution": "node",
     "noImplicitAny": false,
     "resolveJsonModule": true,
     "strict": true,
     "strictNullChecks": true,
-    "target": "ESNext" 
+    "target": "esnext"
   },
-  "include": ["src"]
+  "include": ["src", "typed-css.d.ts"]
 }

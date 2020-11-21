@@ -8,15 +8,15 @@ const resolve = (dir) => {
 };
 
 module.exports = {
+  stats: { children: false },
   entry: {
     app: resolve('src/index.tsx'),
   },
-
   plugins: [
     new HtmlWebpackPlugin({
       template: resolve('public/index.html'),
       filename: 'index.html',
-      favicon: 'public/favicon.svg',
+      favicon: resolve('public/favicon.ico'),
       minify: {
         removeAttributeQuotes: true,
         removeComments: true,
@@ -27,16 +27,12 @@ module.exports = {
       $request: [resolve('src/utils/request.ts'), 'default'],
       $message: [resolve('node_modules/antd/es/message/index.js'), 'default']
     }),
-    new CopyWebpackPlugin(
+    new CopyWebpackPlugin([
       {
-        patterns: [
-          {
-            from: resolve('static'),
-            to: 'static'
-          }
-        ]
+        from: resolve('static'),
+        to: 'static'
       }
-    )
+    ])
   ],
   module: {
     rules: [
