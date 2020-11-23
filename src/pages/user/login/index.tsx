@@ -1,12 +1,21 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom'
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import request from '@/utils/request';
+import userStore from '@/store/user';
 
 import './index.less';
+import service from './service';
 
 const Login: React.FC = () => {
-  const onFinish = values => {
-    console.log('Received values of form: ', values);
+  const history = useHistory();
+  const onFinish = async(values) => {
+    const data = await service.login(values);
+    const token = data.token;
+    request.setHeader({ Authorization: token });
+    userStore.setToken(token);
+    history.replace('/dashboard');
   };
 
   return (
@@ -44,9 +53,9 @@ const Login: React.FC = () => {
         </Form.Item>
 
         <Form.Item className="top-line">
-          <Form.Item name="remember" valuePropName="checked" noStyle>
+          {/* <Form.Item name="remember" valuePropName="checked" noStyle>
             <Checkbox>记住我</Checkbox>
-          </Form.Item>
+          </Form.Item> */}
 
           <a className="login-form-forgot" href="">
             忘记密码 ?

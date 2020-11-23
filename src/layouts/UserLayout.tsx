@@ -21,7 +21,6 @@ const UserLayout: React.FC = () => {
           </div>
           <div className="login">
             <UserRouter />
-            {/* AAA */}
           </div>
           <div className="switchLang">
             <span className="chinese">简体中文</span> 

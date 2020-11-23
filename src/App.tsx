@@ -17,7 +17,13 @@ const App: React.FC = () => {
       <React.Suspense fallback={ <PageLoading /> }>
         <Switch>
           <Route path="/user" component={UserLayout} />
+           {/*
+              由于没有设置exact，只要url中包含"/",就会与这个路由匹配成功，所以必须将它写在最后。
+              如果写在最前面，比如url为“/account/login”时，也会匹配成功，
+             */}
+          <Route path="/" component={BasicLayout} />
         </Switch>
+        
       </React.Suspense>
     </Router>
   )

@@ -27,6 +27,6 @@ export interface UserInfo {
   email?: string
   // 手机号
   phone?: string
-  permission?: Permission[] 
+  permission: Permission[]
 }
 

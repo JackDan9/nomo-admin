@@ -27,7 +27,7 @@ const filterRouteMap = (routeNames: string[], routeMap: CommonRoute[]) => {
 }
 
 const InitRoutes = (permission: Permission[]) => {
-  const routeNames = permission.map((item) => item.name)
+  const routeNames:any = permission.map((item) => item.name)
   return filterRouteMap(routeNames, routeMap);
 }
 

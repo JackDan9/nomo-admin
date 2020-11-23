@@ -3,7 +3,7 @@ import { lazy } from 'react';
 import CommonRoute from '../CommonRoute';
 
 const Dashboard = lazy(
-  () => import(/* webpackChunkName: "dashboard" */ '@')
+  () => import(/* webpackChunkName: "dashboard" */ '@/pages/dashboard')
 )
 
 const route: CommonRoute = {

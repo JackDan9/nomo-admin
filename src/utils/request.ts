@@ -29,7 +29,7 @@ const codeMessage = {
 //   timeout: 5000
 // })
 
-class Request {
+export class HttpRequest {
   private baseConfig: AxiosRequestConfig = {
     baseURL: config.domain,
     headers: {},
@@ -117,7 +117,7 @@ class Request {
     this.instance.interceptors.response.use(
       (response) => {
         const { code, data, msg } = response.data;
-        if (code === 0) {
+        if (code === 200) {
           return data;
         } else {
           notification.error({
@@ -137,4 +137,4 @@ class Request {
   }
 }
 
-export default new Request();
+export default new HttpRequest();
