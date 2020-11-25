@@ -23,10 +23,12 @@ const BasicLayout: React.FC = () => {
     if (!token) {
       history.replace('/user/login')
     } else {
-      service.getUserInfo({ token }).then((res) => {
-        UserStore.setUserInfo(res)
-        setRouteMap(InitRoute(res.permission))
-      })
+      const userInfo = UserStore.userInfo
+      setRouteMap(InitRoute(userInfo.permission))
+      // service.getUserInfo({ token }).then((res) => {
+      //   UserStore.setUserInfo(res)
+      //   setRouteMap(InitRoute(res.permission))
+      // })
     }
   }, [])
 
