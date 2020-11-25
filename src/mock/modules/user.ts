@@ -8,6 +8,7 @@ const loginData = Mock.mock({
 
 const userInfo = Mock.mock({
   name: '@cname',
+  username: '@cname',
   gender: '@pick([1, 2])',
   avatar: 'https://avatars1.githubusercontent.com/u/12805846?s=60&v=4',
   email: '@email',
@@ -34,13 +35,12 @@ export default {
   },
   logout() {
     return {
-      code: 200,
+      code: 0,
       data: {}
     }
   },
   getUserInfo(config: Config) {
     const { token } = getURLParams(config.url)
-    console.log(token);
     if (token === 'd02fd62b-cfdf-9efb-adfb-7fc1e85bf99c') {
       userInfo.roles = [3]
       userInfo.permission = [
@@ -83,7 +83,7 @@ export default {
       ]
     } else {
       userInfo.roles = [1]
-      userInfo.permission = userInfo.permission = [
+      userInfo.permission = [
         {
           id: 1,
           name: 'dashboard',
@@ -113,8 +113,8 @@ export default {
       ]
     }
     return {
-      code: 200,
-      data: userInfo
+      code: 0,
+      result: userInfo
     }
   }
 }

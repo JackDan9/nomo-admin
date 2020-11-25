@@ -116,9 +116,9 @@ export class HttpRequest {
   private setResponseInterceptors = () => {
     this.instance.interceptors.response.use(
       (response) => {
-        const { code, data, msg } = response.data;
-        if (code === 200) {
-          return data;
+        const { code, result, msg } = response.data
+        if (code === 0) {
+          return result;
         } else {
           notification.error({
             message: `请求错误 ${code}`,
