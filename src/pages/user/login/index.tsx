@@ -6,11 +6,14 @@ import { UserInfo } from '@/store/model/user-info'
 import request from '@/utils/request';
 import userStore from '@/store/user';
 
-import './index.less';
+// import './index.less';
+import styles from './index.less';
 import service from './service';
 
 const Login: React.FC = () => {
   const history = useHistory();
+  const zh:string = styles.zh;
+  const loginContainer:string = styles.loginContainer;
   const onFinish = async (values) => {
     const data = await service.login(values);
 
@@ -69,9 +72,9 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="login-container">
+    <div className={loginContainer}>
       <div className="login-name">
-        <div className="login-name-zh">拉姆达</div>
+        <div className={zh}>拉姆达</div>
         <div className="login-name-en">Lamuda</div>
       </div>
       <Form

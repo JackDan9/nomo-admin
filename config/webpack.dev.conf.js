@@ -33,8 +33,7 @@ module.exports = merge(baseWebpackConfig, {
           {
             loader: 'less-loader',
             options: {
-              javascriptEnabled: true,
-              modules: true
+              javascriptEnabled: true
             }
           },
           // {
