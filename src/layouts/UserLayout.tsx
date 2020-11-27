@@ -4,11 +4,12 @@
 import React from 'react';
 import UserRouter from '../router/UserRouter';
 
+import defaultSettings from '@/config/defaultSettings';
 // import styles from './UserLayout.less';
 // const styles = require('./UserLayout.less');
 import styles from "./UserLayout.less";
 // import style from './UserLayout.less';
-import logoSvg from '@/assets/images/logo.svg';
+// import logoSvg from '@/assets/images/logo.svg';
 
 
 const UserLayout: React.FC = () => {
@@ -17,7 +18,7 @@ const UserLayout: React.FC = () => {
       <div className={styles.userLayoutMain}>
         <div className={styles.left}>
           <div className={styles.logo}>
-            <img src={logoSvg} alt="" />
+            <img src={defaultSettings.logo} alt="" />
           </div>
           <div className={styles.login}>
             <UserRouter />
@@ -28,7 +29,7 @@ const UserLayout: React.FC = () => {
             <span className={styles.english}>English</span>
           </div>
         </div>
-        <div className={styles.right}>
+        <div className={styles.right} style={{ background: `url(${defaultSettings.userLayoutBg}) no-repeat fixed center` }}>
         </div>
       </div>
     </div>
