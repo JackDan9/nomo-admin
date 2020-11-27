@@ -6,29 +6,29 @@ import UserRouter from '../router/UserRouter';
 
 // import styles from './UserLayout.less';
 // const styles = require('./UserLayout.less');
-import "./UserLayout.less";
+import styles from "./UserLayout.less";
 // import style from './UserLayout.less';
 import logoSvg from '@/assets/images/logo.svg';
 
 
 const UserLayout: React.FC = () => {
   return (
-    <div className="container">
-      <div className="main">
-        <div className="left">
-          <div className="logo">
+    <div className={styles.userLayout}>
+      <div className={styles.userLayoutMain}>
+        <div className={styles.left}>
+          <div className={styles.logo}>
             <img src={logoSvg} alt="" />
           </div>
-          <div className="login">
+          <div className={styles.login}>
             <UserRouter />
           </div>
-          <div className="switchLang">
-            <span className="chinese">简体中文</span> 
-            <span className="line">|</span>
-            <span className="english">English</span>
+          <div className={styles.switchLang}>
+            <span className={styles.chinese}>简体中文</span> 
+            <span className={styles.line}>|</span>
+            <span className={styles.english}>English</span>
           </div>
         </div>
-        <div className="right">
+        <div className={styles.right}>
         </div>
       </div>
     </div>

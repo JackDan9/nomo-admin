@@ -8,7 +8,7 @@ import UserStore from '@/store/user';
 import HeaderBar from '@/components/HeaderBar';
 import SiderBar from '@/components/SiderBar';
 import service from './service'
-import './BasicLayout.less'
+import styles from './BasicLayout.less'
 
 
 const BasicLayout: React.FC = () => {
@@ -38,9 +38,9 @@ const BasicLayout: React.FC = () => {
   }
 
   return (
-    <Layout className="basic-layout">
+    <Layout className={styles.basicLayout}>
       <Layout.Sider
-        className="basic-layout-sider"
+        className={styles.sider}
         width={160}
         trigger={null}
         collapsible={true}
@@ -49,10 +49,10 @@ const BasicLayout: React.FC = () => {
         <SiderBar routeMap={routeMap} />
       </Layout.Sider>
 
-      <Layout id="layoutMain" className="basic-layout-main">
+      <Layout id="layoutMain" className={styles.main}>
         <HeaderBar collapse={collapse} onTrigger={triggerCollapse} />
 
-        <div className="content">
+        <div className={styles.content}>
           <BasicRouter routeMap={routeMap} />
         </div>
 

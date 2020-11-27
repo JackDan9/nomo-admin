@@ -29,7 +29,12 @@ module.exports = merge(baseWebpackConfig, {
         test: /\.less$/,
         use: [
           'style-loader',
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true
+            }
+          },
           {
             loader: 'less-loader',
             options: {

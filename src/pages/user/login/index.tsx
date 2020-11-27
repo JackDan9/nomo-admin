@@ -6,14 +6,11 @@ import { UserInfo } from '@/store/model/user-info'
 import request from '@/utils/request';
 import userStore from '@/store/user';
 
-// import './index.less';
 import styles from './index.less';
 import service from './service';
 
 const Login: React.FC = () => {
   const history = useHistory();
-  const zh:string = styles.zh;
-  const loginContainer:string = styles.loginContainer;
   const onFinish = async (values) => {
     const data = await service.login(values);
 
@@ -72,14 +69,14 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className={loginContainer}>
-      <div className="login-name">
-        <div className={zh}>拉姆达</div>
-        <div className="login-name-en">Lamuda</div>
+    <div className={styles.loginContainer}>
+      <div className={styles.loginName}>
+        <div className={styles.loginNameZh}>拉姆达</div>
+        <div className={styles.loginNameEn}>Lamuda</div>
       </div>
       <Form
         name="normal_login"
-        className="login-form"
+        className={styles.loginForm}
         initialValues={{ remember: true }}
         onFinish={onFinish}
       >
@@ -87,30 +84,30 @@ const Login: React.FC = () => {
           name="username"
           rules={[{ required: true, message: '请输入用户名!' }]}
         >
-          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="用户名" />
+          <Input prefix={<UserOutlined className={styles.siteFormItemIcon} />} placeholder="用户名" />
         </Form.Item>
         <Form.Item
           name="password"
           rules={[{ required: true, message: '请输入密码!' }]}
         >
           <Input
-            prefix={<LockOutlined className="site-form-item-icon" />}
+            prefix={<LockOutlined className={styles.siteFormItemIcon} />}
             type="password"
             placeholder="密码"
           />
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="login-form-button">
+          <Button type="primary" htmlType="submit" className={styles.loginFromButton}>
             登录
           </Button>
         </Form.Item>
 
-        <Form.Item className="top-line">
+        <Form.Item className={styles.topLine}>
           {/* <Form.Item name="remember" valuePropName="checked" noStyle>
             <Checkbox>记住我</Checkbox>
           </Form.Item> */}
 
-          <a className="login-form-forgot" href="">
+          <a className={styles.loginFromForgot} href="">
             忘记密码 ?
           </a>
         </Form.Item>
