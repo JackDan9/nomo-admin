@@ -6,7 +6,7 @@ import { UserInfo } from '@/store/model/user-info'
 import request from '@/utils/request';
 import userStore from '@/store/user';
 
-import defaultSettings from '@/config/defaultSettings';
+import DefaultSettings from '@/config/defaultSettings';
 import styles from './index.less';
 import service from './service';
 
@@ -72,8 +72,8 @@ const Login: React.FC = () => {
   return (
     <div className={styles.loginContainer}>
       <div className={styles.loginName}>
-        <div className={styles.loginNameZh}>{defaultSettings.chineseName}</div>
-        <div className={styles.loginNameEn}>{defaultSettings.englishName}</div>
+        <div className={styles.loginNameZh}>{DefaultSettings.chineseName}</div>
+        <div className={styles.loginNameEn}>{DefaultSettings.englishName}</div>
       </div>
       <Form
         name="normal_login"

@@ -6,7 +6,8 @@ import CommonRoute from '@/router/BasicRouter/CommonRoute';
 import SvgIcon from '@/components/Base/SvgIcon';
 import logo from '@/assets/images/logo.svg';
 import NavLink from '@/components/NavLink';
-import './index.less';
+
+import styles from './index.less';
 
 interface SiderBarProps {
   routeMap: CommonRoute[]
@@ -61,11 +62,11 @@ const SiderBar: React.FC<SiderBarProps> = ({ routeMap }) => {
 
   return (
     <Scrollbars renderThumbHorizontal={renderThumb} renderThumbVertical={renderThumb}>
-      <div className="side-bar">
-        <div className="side-bar-logo">
+      <div className={styles.siderBar}>
+        <div className={styles.siderBarLogo}>
           <Link to="/dashboard">
-            <img className="image" src={logo} alt="" />
-            <span className="title">Lamuda</span>
+            <img className={styles.image} src={logo} alt="" />
+            <span className={styles.title}>Lamuda</span>
           </Link>
         </div>
 

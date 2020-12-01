@@ -1,12 +1,12 @@
 import React from 'react';
 import { Spin } from 'antd';
 
-import './index.less';
+import styles from './index.less';
 
 
 const PageLoading: React.FC = () => {
     return (
-        <div className="loadingContainer">
+        <div className={styles.loadingContainer}>
             <Spin />
         </div>
     )

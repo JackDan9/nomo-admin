@@ -1,4 +1,5 @@
-import { MenuTheme } from 'antd/es/menu';
+import logoSvg from '@/assets/images/logo.svg';
+import loginBg from '@/assets/images/login_bg.jpg';
 
 export interface DefaultSettings {
   /**
@@ -24,9 +25,9 @@ export interface DefaultSettings {
 }
 
 export default {
-  logo: '@/assets/images/logo.svg',
+  logo: logoSvg,
   chineseName: '拉姆达',
   englishName: 'Lamuda',
   title: 'Admin Lamuda',
-  userLayoutBg: '@/assets/images/login_bg.jpg'
-}
+  userLayoutBg: loginBg
+} as DefaultSettings;

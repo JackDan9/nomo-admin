@@ -1,7 +1,7 @@
 import React from 'react';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import Avatar from '@/components/Avatar';
-import './index.less';
+import styles from './index.less';
 
 interface HeaderBarProps {
   collapse: boolean
@@ -12,11 +12,11 @@ const HeaderBar: React.FC<HeaderBarProps> = (props) => {
   const { collapse, onTrigger } = props;
 
   return (
-    <div className="header-bar">
+    <div className={styles.headerBar}>
       {collapse ? (
-        <MenuUnfoldOutlined className="header-bar-trigger" onClick={onTrigger} />
+        <MenuUnfoldOutlined className={styles.headerBarTrigger} onClick={onTrigger} />
       ) : (
-        <MenuUnfoldOutlined className="header-bar-trigger" onClick={onTrigger} />
+        <MenuUnfoldOutlined className={styles.headerBarTrigger} onClick={onTrigger} />
       )}
 
       <div>
