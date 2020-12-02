@@ -29,8 +29,44 @@ const BasicLayout: React.FC = () => {
       //   UserStore.setUserInfo(res)
       //   setRouteMap(InitRoute(res.permission))
       // })
+      console.log(routeMap);
     }
   }, [])
+  // debugger;
+  // const tabLists:any = this.updateTree(routes);
+  // let tabList:any = [];
+  // let tabListArr:any = [];
+  // tabLists.map((v) => {
+  //   if(v.key === routeKey) {
+  //     if(tabList.length === 0) {
+  //       v.closable = false;
+  //       v.tab = tabName;
+  //       tabList.push(v);
+  //     }
+  //   }
+  //   if(v.key) {
+  //     tabListArr.push(v.key);
+  //   }
+  // });
+
+  // updateTree = (data:any) => {
+  //   const treeData = data;
+  //   const treeList:any = [];
+  //   // 递归获取树列表
+  //   const getTreeList = (data: any) => {
+  //     data.forEach(node => {
+  //       if(!node.level) {
+  //         treeList.push({ tab: node.name, key: node.path, locale: node.locale, closable: true, content: node.component })
+  //       }
+  //       if(node.routes && node.routes.length > 0) {
+  //         //!node.hideChildrenInMenu &&
+  //         getTreeList(node.routes);
+  //       }
+  //     });
+  //   };
+  //   getTreeList(treeData);
+  //   return treeList; 
+  // }
 
   // 切换菜单折叠状态
   const triggerCollapse = () => {

@@ -5,9 +5,7 @@ class User {
   // token
   @observable token: string = sessionStorage.getItem('token') || '';
   // user-info || 用户信息
-  @observable userInfo: UserInfo = {
-    permission: []
-  }
+  @observable userInfo: UserInfo = JSON.parse(sessionStorage.getItem('userinfo') || '{"permission": []}') 
 
   @action
   public setToken(value: string) {
@@ -18,6 +16,7 @@ class User {
   @action
   public setUserInfo(value: UserInfo) {
     this.userInfo = value;
+    sessionStorage.setItem('userinfo', JSON.stringify(value));
   }
 }
 

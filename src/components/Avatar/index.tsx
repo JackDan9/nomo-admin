@@ -16,6 +16,7 @@ const AvatarMenu: React.FC = () => {
         break
       case 'logout':
         UserStore.setToken('')
+        UserStore.setUserInfo({ permission: [] })
         history.replace('/user/login')
         break
     }
