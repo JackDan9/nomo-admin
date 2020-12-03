@@ -40,6 +40,7 @@ const SiderBar: React.FC<SiderBarProps> = ({ routeMap }) => {
 
   const handelClickMenu = (e) => {
     setActiveMenu(e.key)
+    debugger;
   }
 
   // 根据路由配置生成菜单

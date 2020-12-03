@@ -62,6 +62,10 @@ const Login: React.FC = () => {
           name: 'dashboard',
           description: '首页',
           reminder: '您没有权限访问首页'
+        },
+        {
+          id: 6,
+          name: 'account'
         }
       ]
     }

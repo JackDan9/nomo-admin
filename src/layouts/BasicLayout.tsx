@@ -10,13 +10,16 @@ import SiderBar from '@/components/SiderBar';
 import service from './service'
 import styles from './BasicLayout.less'
 
-
-const BasicLayout: React.FC = () => {
+const BasicLayout: React.FC = (props) => {
   const history = useHistory()
   // 是否折叠侧边菜单
   const [collapse, setCollapse] = useState(false)
   // 路由配置
   const [routeMap, setRouteMap] = useState<CommonRoute[]>([])
+  // 是否现实多标签Tab
+  const [hideTabs, setHiderTabs] = useState(true);
+  // 实现多标签的Tab列表
+  // const [tabList, setTabList]  = useState<tabList[]>([])
 
   useEffect(() => {
     const token = UserStore.token
@@ -29,10 +32,8 @@ const BasicLayout: React.FC = () => {
       //   UserStore.setUserInfo(res)
       //   setRouteMap(InitRoute(res.permission))
       // })
-      console.log(routeMap);
     }
   }, [])
-  // debugger;
   // const tabLists:any = this.updateTree(routes);
   // let tabList:any = [];
   // let tabListArr:any = [];
@@ -86,7 +87,7 @@ const BasicLayout: React.FC = () => {
       </Layout.Sider>
 
       <Layout id="layoutMain" className={styles.main}>
-        <HeaderBar collapse={collapse} onTrigger={triggerCollapse} />
+        <HeaderBar collapse={collapse} onTrigger={triggerCollapse} hideTabs={hideTabs} routeMap={routeMap} />
 
         <div className={styles.content}>
           <BasicRouter routeMap={routeMap} />
