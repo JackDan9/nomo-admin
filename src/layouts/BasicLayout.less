@@ -3,6 +3,27 @@
   .main {
     height: 100vh;
     overflow-y: auto;
+
+    .siderBar {
+      .siderBarLogo {
+        height: 64px;
+        line-height: 64px;
+        padding-left: 20px;
+        background-color: #001529;
+        overflow: hidden;
+    
+        .image {
+          width: 40px;
+        }
+    
+        .title {
+          color: #fff;
+          font-size: 20px;
+          vertical-align: middle;
+          margin-left: 10px;
+        }
+      }
+    }
   }
 
   .sider::-webkit-scrollbar {
@@ -14,6 +35,31 @@
 
     .content {
       margin: 14px 14px 0;
+    }
+
+    .headerBar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 64px;
+      line-height: 64px;
+      padding: 0 24px;
+      background-color: #fff;
+      box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+    
+      .headerBarTrigger {
+        font-size: 18px;
+        cursor: pointer;
+        transition: color 0.3s;
+    
+        &:hover {
+          color: black;
+        }
+      }
+    }
+
+    .content {
+      margin: 0 4px;
     }
   }
 }

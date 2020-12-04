@@ -1,7 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu } from 'antd';
 import { Scrollbars } from 'react-custom-scrollbars';
+
+import Tab from '@/store/tab';
 import CommonRoute from '@/router/BasicRouter/CommonRoute';
 import SvgIcon from '@/components/Base/SvgIcon';
 import logo from '@/assets/images/logo.svg';
@@ -11,6 +13,14 @@ import styles from './index.less';
 
 interface SiderBarProps {
   routeMap: CommonRoute[]
+}
+
+interface tabList {
+  tab: any,
+  key: string,
+  locale: any,
+  closable: boolean,
+  component: any
 }
 
 /**
@@ -31,16 +41,89 @@ const renderThumb = (props: any) => {
 const SiderBar: React.FC<SiderBarProps> = ({ routeMap }) => {
   const location = useLocation()
 
+  const routeKey = '/dashboard';
   // 当前激活的菜单
-  const [activeMenu, setActiveMenu] = useState('/dashboard')
+  const [activeMenu, setActiveMenu] = useState(routeKey)
 
   useEffect(() => {
-    setActiveMenu(location.pathname)
+    if(location.pathname !== '/dashboard') {
+      setActiveMenu('/dashboard');
+    } else {
+      setActiveMenu(location.pathname)
+    }
+    console.log(Tab.routerKey);
   }, [])
 
+  const updateTree = (data) => {
+    const treeData = data;
+    const treeList: tabList[] = [];
+
+    // 递归获取树列表
+    const getTreeList = data => {
+      data.forEach(node => {
+        treeList.push({
+          tab: node.title,
+          key: node.path,
+          locale: node.locale,
+          closable: true,
+          component: node.component
+        })
+
+        if (node.routes && node.routes.length !== 0) {
+          getTreeList(node.routes);
+        }
+      });
+    };
+
+    getTreeList(treeData);
+    return treeList;
+  }
+
+  const tabLists = updateTree(routeMap);
+  const tabName = '首页';
+  const tabList = Tab.tabList;
+  const tabListArr:any = Tab.tabListArr;
+  
+  tabLists.map((tabItem) => {
+    if(tabItem.key === routeKey) {
+      if(tabList.length === 0) {
+        tabItem.closable = false;
+        tabItem.tab = tabName;
+        Tab.setSplitKey(tabItem.key)
+        Tab.setTabList([...tabList, tabItem]);
+      }
+    }
+
+    if(tabItem.key && !tabListArr.includes(tabItem.key)) {
+      Tab.setTabListArr([...tabListArr, tabItem.key]);
+    }
+  })
+
+
+  const [tabListKey, setTabListKey] = useState([routeKey]);
   const handelClickMenu = (e) => {
-    setActiveMenu(e.key)
-    debugger;
+    const { key } = e;
+    const tabList = Tab.tabList;
+    const tabListArr = Tab.tabListArr;
+    Tab.setSplitKey(key);
+    tabLists.map((tabItem) => {
+      if (tabItem.key === key) {
+        if (tabList.length === 0) {
+          tabItem.closable = false;
+          Tab.setTabList([...tabList, tabItem])
+        } else {
+          if (!tabListKey.includes(key)) {
+            const { closable, component, locale, tab } = tabItem;
+            Tab.setTabList([...tabList, { closable, component, key: e.key, locale, tab }])
+            setTabListKey((tabListKey) => [...tabListKey, key]);
+          }
+        }
+      }
+    })
+
+    if (tabListArr.includes(key)) {
+      setActiveMenu(key)
+    }
   }
 
   // 根据路由配置生成菜单
@@ -80,4 +163,3 @@ const SiderBar: React.FC<SiderBarProps> = ({ routeMap }) => {
 }
 
 export default SiderBar;
-

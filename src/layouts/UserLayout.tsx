@@ -5,11 +5,7 @@ import React from 'react';
 import UserRouter from '../router/UserRouter';
 
 import DefaultSettings from '@/config/defaultSettings';
-// import styles from './UserLayout.less';
-// const styles = require('./UserLayout.less');
 import styles from "./UserLayout.less";
-// import style from './UserLayout.less';
-// import logoSvg from '@/assets/images/logo.svg';
 
 
 const UserLayout: React.FC = () => {
