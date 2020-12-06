@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { Layout, BackTop, Menu } from 'antd';
+import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Layout, BackTop, Menu, Tabs } from 'antd';
 import BasicRouter from '@/router/BasicRouter';
 import CommonRoute from '@/router/BasicRouter/CommonRoute';
 import InitRoute from '@/router/BasicRouter/InitRoute';
 import UserStore from '@/store/user';
-import HeaderBar from '@/components/HeaderBar';
-import SiderBar from '@/components/SiderBar';
-import service from './service'
-import Tab from '@/store/tab';
+// import HeaderBar from '@/components/HeaderBar';
+// import SiderBar from '@/components/SiderBar';
+// import service from './service'
+// import Tab from '@/store/tab';
 import styles from './BasicLayout.less'
 
 // https://github.com/malte-wessel/react-custom-scrollbars
 import { Scrollbars } from 'react-custom-scrollbars';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import Avatar from '@/components/Avatar';
-import route from '@/router/BasicRouter/modules/dashboard';
 import SvgIcon from '@/components/Base/SvgIcon';
 import NavLink from '@/components/NavLink';
 
@@ -23,27 +22,36 @@ import DefaultSettings from '@/config/defaultSettings';
 interface tabList {
   tab: any,
   key: string,
-  path: any,
   locale: any,
   closable: boolean,
+  exact: boolean,
+  path: string,
   component: any
 }
 
 const BasicLayout: React.FC = (props) => {
   const history = useHistory()
+  const location = useLocation()
+  const { TabPane } = Tabs;
+  const routeName = '首页';
+  const { Content } = Layout;
+  const contentStyle = { paddingTop: 0 };
   // 是否折叠侧边菜单
   const [collapse, setCollapse] = useState(false)
   // 路由配置
   const [routeMap, setRouteMap] = useState<CommonRoute[]>([])
   // 是否现实多标签Tab
-  const [hideTabs, setHiderTabs] = useState(true);
-  // 实现多标签的Tab列表
-  const [tabList, setTabList]  = useState<tabList[]>([])
+  // const [hideTabs, setHiderTabs] = useState(true);
+  // 路由的Key
+  const routeKey = '/dashboard'
   // 实现多标签的Tab的缓存Key列表
-  const [tabListArr, setTabListArr] = useState<any[]>([])
-  const routeKey = '/dashboard';
+  const [tabKeyList, setTabKeyList] = useState<any[]>([routeKey])
+  // 实现多标签的Tab列表
+  // const [tabListArr, setTabListArr] = useState<any[]>([]);
   // 当前激活的菜单
-  const [activeMenu, setActiveMenu] = useState(routeKey)
+  const [activeKey, setActiveKey] = useState(routeKey);
+  // 实现多标签的Tab列表
+  const [tabList, setTabList] = useState<tabList[]>([]);
 
 
   useEffect(() => {
@@ -57,44 +65,55 @@ const BasicLayout: React.FC = (props) => {
       //   UserStore.setUserInfo(res)
       //   setRouteMap(InitRoute(res.permission))
       // })
+      if(location.pathname !== '/dashboard') {
+        setActiveKey('/dashboard');
+        history.push('/dashboard');
+      } else {
+        setActiveKey(location.pathname)
+      }
     }
   }, [])
 
-  const updateTree = (data:any) => {
+  /**
+   * 
+   * @param data router data
+   * @description 递归获取路由树列表
+   */
+  const updateTree = (data: any) => {
     const treeData = data;
-    const treeList:any = [];
-    // 递归获取树列表
+    const treeList: any = [];
+    
     const getTreeList = (data: any) => {
       data.forEach(node => {
-        if(!node.level) {
-          treeList.push({ tab: node.name, key: node.path, locale: node.locale, closable: true, content: node.component })
+        if (!node.level) {
+          treeList.push({ tab: node.title, key: node.path, path: node.path, locale: node.locale, closable: true, component: node.component, exact: node.exact })
         }
-        if(node.routes && node.routes.length > 0) {
-          getTreeList(node.routes);
+        if (node.children && node.children.length > 0) {
+          getTreeList(node.children);
         }
       });
     };
     getTreeList(treeData);
-    return treeList; 
+    return treeList;
   }
 
   const routes = routeMap;
-  debugger;
-  const tabLists:any = updateTree(routes);
-  const routeName = '首页';
+  const tabLists: any = updateTree(routes);
+  const tabListArr: any[] = [];
 
   tabLists.map((v) => {
-    if(v.key === routeKey) {
-      if(tabList.length === 0) {
+    if (v.key === routeKey) {
+      if (tabList.length === 0) {
         v.closable = false;
         v.tab = routeName;
-        tabList.push(v);
+        setTabList([...tabList, v]);
       }
     }
     if(v.key) {
       tabListArr.push(v.key);
     }
   });
+
   /**
    * @description 侧边菜单
    */
@@ -117,9 +136,41 @@ const BasicLayout: React.FC = (props) => {
     setCollapse((state) => !state)
   }
 
-  const { Content } = Layout;
-  const contentStyle = { paddingTop: 0 };
-
+  const updateTreeList = (data) => {
+    const treeData = data;
+    const treeList: any = [];
+    // 递归获取树列表
+    const getTreeList = data => {
+      data.forEach(node => {
+        if (!node.level) {
+          treeList.push({ tab: node.title, key: node.path, path: node.path, locale: node.locale, closable: true, component: node.component, exact: node.exact });
+        }
+        if (node.children && node.children.length > 0) { //!node.hideChildrenInMenu &&
+          getTreeList(node.children);
+        }
+      });
+    };
+    getTreeList(treeData);
+    return treeList;
+  };
+  
+  /**
+   * 
+   * @param v 
+   * @description 截取路由 /a/b/1
+   */
+  const StringToRoute = ( v ) => {
+    const str = /\/:(.+)/g
+    const key = v.replace(str,(_,g)=>'')
+    const keyArr = key.split('/')
+    if(keyArr.length === 2) {
+      const keyString = [keyArr[0], keyArr[1]];
+      return (keyString.toString()).replace(/,/g,'/')
+    } else {
+      const keyString = [keyArr[0],keyArr[1],keyArr[2]]
+      return (keyString.toString()).replace(/,/g,'/')
+    }
+  }
   /**
    * 
    * @param e 
@@ -127,7 +178,26 @@ const BasicLayout: React.FC = (props) => {
    */
   const handelClickMenu = (e) => {
     const { key } = e;
-    setActiveMenu(key);
+    let splitKey = StringToRoute(key);
+    const tabLists = updateTreeList(routeMap);
+    
+    if (tabListArr.includes(splitKey)) {
+      setActiveKey(key);
+    }
+    tabLists.map((v) => {
+      if (v.key === splitKey) {
+        if (tabList.length === 0) {
+          v.closable = false;
+          setTabList([...tabList, v]);
+        } else {
+          if (!tabKeyList.includes(key)) {
+            const { closable, component, locale, tab, exact, path } = v;
+            setTabList([...tabList, { closable, component, key, locale, tab, exact, path }]);
+            setTabKeyList([...tabKeyList, key]);
+          }
+        }
+      }
+    });
   }
 
   /**
@@ -152,6 +222,48 @@ const BasicLayout: React.FC = (props) => {
     )
   }
 
+  const changeActiveKey = (activeKey) => {
+    setActiveKey(activeKey);
+    history.push(activeKey);
+  }
+
+  type ActionType = "add" | "remove"
+  // @ts-ignore
+  type TargetKey = string | MouseEvent<HTMLElement, MouseEvent>;
+
+  const onEdit = (targetKey: TargetKey, action: ActionType) => {
+    // debugger;
+    // return this[action](targetKey);
+    if(action === 'remove') {
+      remove(targetKey)
+    }
+  }
+
+  const remove = (targetKey) => {
+    console.log(activeKey);
+    let lastIndex;
+    tabList.forEach((tabItem, index) => {
+      if(tabItem.key === targetKey) {
+        lastIndex = index - 1;
+      }
+    })
+    const tabTempList:any = [];
+    const tabTempKeyList:any = [];
+    tabList.map(tabItem => {
+      if(tabItem.key !== targetKey) {
+        tabTempList.push(tabItem);
+        tabTempKeyList.push(tabItem.key);
+      }
+    })
+    if (lastIndex >= 0 && activeKey === targetKey) {
+      setActiveKey(tabList[lastIndex].key);
+    }
+    history.push(activeKey);
+    setTabList(tabTempList);
+    setTabKeyList(tabTempKeyList);
+    setActiveKey(activeKey);
+  }
+
   return (
     <Layout className={styles.basicLayout}>
       <Layout.Sider
@@ -166,11 +278,11 @@ const BasicLayout: React.FC = (props) => {
           <div className={styles.siderBar}>
             <div className={styles.siderBarLogo}>
               <Link to="/dashboard">
-                <img className={styles.image} src={DefaultSettings.logo} alt="" />
+                <img className={styles.image} src={DefaultSettings.logo} alt="logo" />
                 <span className={styles.title}>{DefaultSettings.title}</span>
               </Link>
             </div>
-            <Menu theme="dark" mode="inline" selectedKeys={[activeMenu]} onClick={handelClickMenu}>
+            <Menu theme="dark" mode="inline" selectedKeys={[activeKey]} onClick={handelClickMenu}>
               {routeMap.map((route) => getMenuItem(route))}
             </Menu>
           </div>
@@ -193,7 +305,22 @@ const BasicLayout: React.FC = (props) => {
             </div>
           </div>
           <Content className={styles.content} style={contentStyle}>
-
+            {tabList && tabList.length ? (
+              <Tabs
+                type="editable-card"
+                onChange={changeActiveKey}
+                activeKey={activeKey}
+                tabBarStyle={{ background: '#fff' }}
+                tabPosition="top"
+                hideAdd
+                tabBarGutter={-1}
+                onEdit={onEdit}>
+                {tabList.map(tabItem => (
+                  <TabPane tab={tabItem.tab} key={tabItem.key} closable={tabItem.closable}>
+                  </TabPane>
+                ))}
+              </Tabs>
+            ) : null}
           </Content>
         </div>
         <div className={styles.content}>
@@ -209,19 +336,5 @@ const BasicLayout: React.FC = (props) => {
     </Layout>
   )
 }
-/**
- * 
- * @param prevProps 
- * @param nextProps 
- * @description { 如果把 nextProps 传入 render 方法的返回结果与将 prevProps 传入 render 方法的返回结果一致则返回 true，否则返回 false }
- */
-const updateComponent = (prevProps:any, nextProps:any) => {
- 
- if(nextProps === prevProps) {
-  return false;
- } else {
-  return true;
- }
-}
 
-export default React.memo(BasicLayout);
+export default BasicLayout;

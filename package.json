@@ -26,9 +26,11 @@
     "react": "^16.8.6",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.8.6",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "umi": "^3.3.0"
   },
   "devDependencies": {
+    "@ant-design/pro-layout": "^6.5.17",
     "@svgr/webpack": "^4.3.2",
     "@types/classnames": "^2.2.7",
     "@types/react": "^16.8.23",

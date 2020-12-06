@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 import { Menu } from 'antd';
 import { Scrollbars } from 'react-custom-scrollbars';
 
@@ -40,6 +40,7 @@ const renderThumb = (props: any) => {
 
 const SiderBar: React.FC<SiderBarProps> = ({ routeMap }) => {
   const location = useLocation()
+  const history = useHistory();
 
   const routeKey = '/dashboard';
   // 当前激活的菜单
@@ -48,10 +49,10 @@ const SiderBar: React.FC<SiderBarProps> = ({ routeMap }) => {
   useEffect(() => {
     if(location.pathname !== '/dashboard') {
       setActiveMenu('/dashboard');
+      history.push('/dashboard');
     } else {
       setActiveMenu(location.pathname)
     }
-    console.log(Tab.routerKey);
   }, [])
 
   const updateTree = (data) => {

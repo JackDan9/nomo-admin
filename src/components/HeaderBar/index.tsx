@@ -64,11 +64,11 @@ const HeaderBar: React.FC<HeaderBarProps> = (props) => {
             tabBarStyle={{ background: '#fff' }}
             tabPosition="top"
             tabBarGutter={-1}>
-            {Tab.tabList.map(item => (
-              <TabPane tab={item.tab} key={item.key} closable={item.closable} style={{marginLeft: '2px'}}>
+            {Tab.tabList.map(item => (<TabPane tab={item.tab} key={item.key} closable={item.closable} style={{marginLeft: '2px'}}>
                 {/* <Route key={item.key} path={item.key} component={item.component} exact={item.exact} /> */}
                 {/* { item.content } */}
               </TabPane>
+              
             ))}
           </Tabs>
         ) : null}
