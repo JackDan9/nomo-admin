@@ -240,7 +240,7 @@ const BasicLayout: React.FC = (props) => {
   }
 
   const remove = (targetKey) => {
-    console.log(activeKey);
+    let tempActiveKey:any = activeKey;
     let lastIndex;
     tabList.forEach((tabItem, index) => {
       if(tabItem.key === targetKey) {
@@ -256,12 +256,12 @@ const BasicLayout: React.FC = (props) => {
       }
     })
     if (lastIndex >= 0 && activeKey === targetKey) {
-      setActiveKey(tabList[lastIndex].key);
+      tempActiveKey = tabList[lastIndex].key;
     }
-    history.push(activeKey);
+    history.push(tempActiveKey);
     setTabList(tabTempList);
     setTabKeyList(tabTempKeyList);
-    setActiveKey(activeKey);
+    setActiveKey(tempActiveKey);
   }
 
   return (

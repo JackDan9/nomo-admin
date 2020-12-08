@@ -2,8 +2,9 @@ import { Permission } from '@/store/model/permission';
 import CommonRoute from './CommonRoute';
 import accountRoute from './modules/account';
 import dashboardRoute from './modules/dashboard';
+import orderRoute from './modules/order';
 
-const routeMap = [dashboardRoute, accountRoute];
+const routeMap = [dashboardRoute, accountRoute, orderRoute];
 
 // 根据路由名称获取可访问的路由表
 const filterRouteMap = (routeNames: string[], routeMap: CommonRoute[]) => {

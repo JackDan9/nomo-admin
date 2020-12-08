@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import "./index.less";
 
 class Dashboard extends Component {
@@ -6,6 +7,7 @@ class Dashboard extends Component {
     return (
       <div style={{ backgroundColor: '#fff' }}>
         Dashboard
+        {/* <StandardTable /> */}
       </div>
     )
   }

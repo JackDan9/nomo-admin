@@ -64,6 +64,10 @@ const Login: React.FC = () => {
           reminder: '您没有权限访问首页'
         },
         {
+          id: 5,
+          name: 'order'
+        },
+        {
           id: 6,
           name: 'account'
         }

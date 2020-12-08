@@ -4,15 +4,18 @@ import Icon from '@ant-design/icons';
 import { tupleStr } from '@/utils/tuple';
 import Dashboard from '@/assets/icons/dashboard.svg';
 import Account from '@/assets/icons/account.svg';
+import Fly from '@/assets/icons/fly.svg';
 
 const ICON_NAME_MAP = {
   dashboard: Dashboard,
-  account: Account
+  account: Account,
+  fly: Fly
 }
 
 const iconNames = tupleStr(
   'dashboard',
-  'account'
+  'account',
+  'fly'
 )
 
 export type IconName = typeof iconNames[number];
