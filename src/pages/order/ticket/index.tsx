@@ -192,7 +192,7 @@ const Ticket = () => {
       <Row justify="space-between">
         <Col>
           <div className={styles.sectionTitle}>
-            <span className={styles.sectionTitleTag} />
+            <span className={styles.sectionTitleTag}></span>
             <span className={styles.sectionTitleName}>航空票列表</span>
           </div>
 
