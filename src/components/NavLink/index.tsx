@@ -17,4 +17,4 @@ const NavLink: React.FC<NavLinkProps> = ({ path, icon, title }) => {
   )
 }
 
-export default NavLink
+export default NavLink;

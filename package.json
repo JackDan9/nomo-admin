@@ -12,7 +12,6 @@
   "author": "jackdan <1835812864@qq.com>",
   "license": "MIT",
   "dependencies": {
-    "@ant-design/icons": "^4.2.2",
     "@antv/data-set": "^0.10.2",
     "@types/react-router-dom": "^5.1.5",
     "antd": "^4.6.2",
@@ -26,8 +25,7 @@
     "react": "^16.8.6",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.8.6",
-    "react-router-dom": "^5.2.0",
-    "umi": "^3.3.0"
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
     "@ant-design/icons": "^4.0.0",

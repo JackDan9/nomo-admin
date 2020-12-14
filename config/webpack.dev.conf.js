@@ -33,13 +33,13 @@ module.exports = merge(baseWebpackConfig, {
             loader: 'css-loader',
             options: {
               modules: true
-            }
+            },
           },
           {
             loader: 'less-loader',
             options: {
               lessOptions: {
-                javascriptEnabled: true
+                javascriptEnabled: true,
               }
             }
           },
@@ -52,7 +52,26 @@ module.exports = merge(baseWebpackConfig, {
           //     ]
           //   }
           // }
-        ]
+        ],
+        exclude: [path.resolve(__dirname, '..', 'node_modules')]
+      },
+      {
+        test: /\.less$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              lessOptions: {
+                javascriptEnabled: true
+              }
+            }
+          },
+        ],
+        include: [path.resolve(__dirname, '..', 'node_modules')]
       }
     ]
   }

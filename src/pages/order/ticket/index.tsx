@@ -189,7 +189,7 @@ const Ticket = () => {
 
   return (
     <div className={styles.pageUser}>
-      <Row justify="space-between">
+      <Row justify="space-between" className={styles.sectionContent}>
         <Col>
           <div className={styles.sectionTitle}>
             <span className={styles.sectionTitleTag}></span>

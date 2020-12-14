@@ -1,9 +1,12 @@
+/**
+ * 🏆 为了标准的二维表组件
+ * 
+ */
 import React from 'react';
 import { Button, Tooltip, Dropdown, Menu, Input } from 'antd';
 import { EllipsisOutlined, QuestionCircleOutlined, SearchOutlined } from '@ant-design/icons';
 import ProTable, { ProColumns, TableDropdown } from '@ant-design/pro-table';
-
-import './index.less';
+import styles from './index.less';
 
 const valueEnum = {
   0: 'close',
@@ -11,6 +14,7 @@ const valueEnum = {
   2: 'online',
   3: 'error',
 };
+
 export interface TableListItem {
   key: number;
   name: string;
@@ -21,13 +25,14 @@ export interface TableListItem {
   progress: number;
   money: number;
   memo: string;
-}
+};
+
 const tableListDataSource: TableListItem[] = [];
 const creators = ['付小小', '曲丽丽', '林东东', '陈帅帅', '兼某某'];
-for (let i = 0; i < 5; i += 1) {
+for (let i = 0; i < 30; i += 1) {
   tableListDataSource.push({
     key: i,
-    name: 'AppName',
+    name: 'PJ12138',
     containers: Math.floor(Math.random() * 20),
     creator: creators[Math.floor(Math.random() * creators.length)],
     status: valueEnum[Math.floor(Math.random() * 10) % 4],
@@ -45,7 +50,7 @@ const columns: ProColumns<TableListItem>[] = [
     width: 48,
   },
   {
-    title: '应用名称',
+    title: '航线',
     dataIndex: 'name',
     render: (_) => <a>{_}</a>,
     // 自定义筛选项功能具体实现请参考 https://ant.design/components/table-cn/#components-table-demo-custom-filter-panel
@@ -154,7 +159,7 @@ const StandardTable: React.FC = () => {
       }}
       dateFormatter="string"
       toolbar={{
-        title: '高级表格',
+        title: '机票信息',
         tooltip: '这是一个标题提示',
       }}
       toolBarRender={() => [

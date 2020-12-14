@@ -1,4 +1,4 @@
-@import '~antd/es/style/themes/default.less';
+// @import '~antd/es/style/themes/default.less';
 
 @theme-color: #5b5bea;
 
@@ -6,23 +6,27 @@
   padding: 24px;
   background-color: #fff;
 
-  .sectionTitle {
-    display: inline-block;
-    margin-right: 10px;
+  .sectionContent {
+    padding: 0 0 24px 8px;
 
-    .sectionTitleTag {
+    .sectionTitle {
       display: inline-block;
-      width: 6px;
-      height: 18px;
-      background-color: @theme-color;
-      border-radius: 50%;
-      vertical-align: middle;
-    }
+      margin-right: 10px;
 
-    .sectionTitleName {
-      font-size: 18px;
-      margin-left: 10px;
-      vertical-align: middle;
+      .sectionTitleTag {
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        background-color: @theme-color;
+        border-radius: 50%;
+        vertical-align: middle;
+      }
+
+      .sectionTitleName {
+        font-size: 18px;
+        margin-left: 10px;
+        vertical-align: middle;
+      }
     }
   }
 }
