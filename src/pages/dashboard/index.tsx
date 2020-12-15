@@ -4,11 +4,12 @@ import StandardTable from '@/components/StandardTable';
 import "./index.less";
 
 class Dashboard extends Component {
+  
   render() {
     return (
-      <div style={{ backgroundColor: '#fff' }}>
+      <div style={{ backgroundColor: '#f0f2f5' }}>
         {/* Dashboard */}
-        <StandardTable />
+        <StandardTable title="机票信息" />
       </div>
     )
   }

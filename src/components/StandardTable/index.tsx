@@ -8,6 +8,11 @@ import { EllipsisOutlined, QuestionCircleOutlined, SearchOutlined } from '@ant-d
 import ProTable, { ProColumns, TableDropdown } from '@ant-design/pro-table';
 import styles from './index.less';
 
+
+interface StandardTableProps {
+  title: string,
+}
+
 const valueEnum = {
   0: 'close',
   1: 'running',
@@ -89,14 +94,15 @@ const columns: ProColumns<TableListItem>[] = [
     },
   },
   {
-    title: (
-      <>
-        创建时间
-        <Tooltip placement="top" title="这是一段描述">
-          <QuestionCircleOutlined style={{ marginLeft: 4 }} />
-        </Tooltip>
-      </>
-    ),
+    // title: (
+    //   <>
+    //     创建时间
+    //     <Tooltip placement="top" title="这是一段描述">
+    //       <QuestionCircleOutlined style={{ marginLeft: 4 }} />
+    //     </Tooltip>
+    //   </>
+    // ),
+    title: '创建时间',
     width: 140,
     key: 'since',
     dataIndex: 'createdAt',
@@ -137,7 +143,18 @@ const menu = (
   </Menu>
 );
 
-const StandardTable: React.FC = () => {
+const defaultColConfig = {
+  xs: 24,
+  sm: 24,
+  md: 12,
+  lg: 12,
+  xl: 6,
+  xxl: 4,
+};
+
+const StandardTable: React.FC<StandardTableProps> = (props) => {
+  const { title } = props;
+
   return (
     <ProTable<TableListItem>
       columns={columns}
@@ -154,12 +171,13 @@ const StandardTable: React.FC = () => {
         showQuickJumper: true,
       }}
       search={{
-        layout: 'vertical',
+        layout: 'horizontal',
         defaultCollapsed: false,
+        span: 4
       }}
       dateFormatter="string"
       toolbar={{
-        title: '机票信息',
+        title: title,
         tooltip: '这是一个标题提示',
       }}
       toolBarRender={() => [
@@ -176,6 +194,9 @@ const StandardTable: React.FC = () => {
           </Button>
         </Dropdown>,
       ]}
+      style={{
+        margin: '24px'
+      }}
     />
   );
 };
