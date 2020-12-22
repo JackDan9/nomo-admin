@@ -232,8 +232,6 @@ const BasicLayout: React.FC = (props) => {
   type TargetKey = string | MouseEvent<HTMLElement, MouseEvent>;
 
   const onEdit = (targetKey: TargetKey, action: ActionType) => {
-    // debugger;
-    // return this[action](targetKey);
     if(action === 'remove') {
       remove(targetKey)
     }
