@@ -11,12 +11,10 @@ import { BarProps } from './data.d';
 
 const Bar: React.FC<BarProps> = (props) => {
 
-  const { height } = props;
+  const { height, id } = props;
 
   const [autoHideXLabels, setAutoHideXLabels] = useState(false);
-  
-  // const [root, setRoot] = useState<HTMLDivElement | undefined>(undefined);
-  // const [node, setNode] = useState<HTMLDivElement | undefined>(undefined);
+
   let root:any = undefined;
   let node:any = undefined;
 
@@ -50,6 +48,7 @@ const Bar: React.FC<BarProps> = (props) => {
 
   const [option, setOption] = useState({
     title: {
+      show: false,
       text: '动态数据',
       subtext: '纯属虚构'
     },
@@ -66,7 +65,7 @@ const Bar: React.FC<BarProps> = (props) => {
       data: ['最新成交价', '预购队列']
     },
     toolbox: {
-      show: true,
+      show: false,
       feature: {
         dataView: { readOnly: false },
         restore: {},
@@ -130,6 +129,7 @@ const Bar: React.FC<BarProps> = (props) => {
         type: 'bar',
         xAxisIndex: 1,
         yAxisIndex: 1,
+        color: 'rgba(24, 144, 255, 0.85)',
         data: (function () {
           let res: any = [];
           let len: any = 10;
@@ -142,6 +142,7 @@ const Bar: React.FC<BarProps> = (props) => {
       {
         name: '最新成交价',
         type: 'line',
+        color: '',
         data: (function () {
           let res: any = [];
           let len: any = 0;
@@ -158,7 +159,7 @@ const Bar: React.FC<BarProps> = (props) => {
   let app: any = {};
   app.count = 11;
   useEffect(() => {
-    let chartDom: any = document.getElementById('chart');
+    let chartDom: any = document.getElementById(id);
     let myChart: any = echarts.init(chartDom);
     setInterval(function () {
       let axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
@@ -186,12 +187,11 @@ const Bar: React.FC<BarProps> = (props) => {
 
 
   return (
-    // <div id="chart" style={{ width: '100%', height: '600px' }} ref={() => handleRoot}>
-    //   <div ref={() => handleRef}>
-    //   </div>
-    // </div>
-    <div id="chart" style={{ height }}></div>
+    <div id={id} style={{ height }} ref={() => handleRoot}>
+      <div ref={() => handleRef}>
+      </div>
+    </div>
   )
 }
 
-export default Bar;
+export default autoHeight()(Bar);

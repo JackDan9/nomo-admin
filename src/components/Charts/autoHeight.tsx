@@ -47,7 +47,6 @@ function autoHeight() {
       root: HTMLDivElement | undefined = undefined;
 
       componentDidMount() {
-        debugger;
         const { height } = this.props;
         if (!height) {
           let h = getAutoHeight(this.root);
