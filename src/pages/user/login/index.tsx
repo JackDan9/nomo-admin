@@ -93,13 +93,14 @@ const Login: React.FC = () => {
           name="username"
           rules={[{ required: true, message: '请输入用户名!' }]}
         >
-          <Input prefix={<UserOutlined className={styles.siteFormItemIcon} />} placeholder="用户名" />
+          <Input className={styles.siteFormItemInput} prefix={<UserOutlined className={styles.siteFormItemIcon} />} placeholder="用户名" />
         </Form.Item>
         <Form.Item
           name="password"
           rules={[{ required: true, message: '请输入密码!' }]}
         >
           <Input
+            className={styles.siteFormItemInput}
             prefix={<LockOutlined className={styles.siteFormItemIcon} />}
             type="password"
             placeholder="密码"
