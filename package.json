@@ -29,7 +29,8 @@
     "react": "^16.8.6",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.8.6",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "use-media-antd-query": "^1.0.3"
   },
   "devDependencies": {
     "@ant-design/icons": "^4.0.0",

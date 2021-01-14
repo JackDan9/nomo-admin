@@ -9,7 +9,7 @@
 
   .userLayoutMain {
     display: flex;
-    position: relative;
+    position: static;
     width: 100%;
     height: 100%;
 
@@ -20,13 +20,13 @@
       height: 90%;
       background: #ffffff;
       background-size: cover;
-      margin: auto;
-      z-index: 9;
+      z-index: 1;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       border: 1px solid #ffffff;
       border-radius: 8px;
+      overflow: auto;
 
       @media (min-width: @screen-md-min) {
         display: flex;
@@ -69,18 +69,12 @@
     
       .switchLang {
         display: flex;
-        height: auto;
+        height: 120px;
         justify-content: center;
-        align-items: center;
-        padding-bottom: 0;
-
+        align-items: flex-end;
+        padding-bottom: 10px;
         color: @text-color-secondary;
         transition: all 0.3s;
-        
-        @media (min-width: @screen-md-min) {
-          height: 120px;
-          padding-bottom: 20px;
-        }
 
         .line {
           padding-left: 5px;
