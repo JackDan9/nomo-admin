@@ -3,6 +3,65 @@
 .basicLayout {
   margin: 0;
   padding: 0;
+  // position: relative;
+
+  .mobileDrawer {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    transition: transform .3s cubic-bezier(.7,.3,.1,1),height 0s ease .3s,width 0s ease .3s;
+  }
+
+  .mobileMask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: rgba(0,0,0,.45);
+    opacity: 0;
+    filter: alpha(opacity=45);
+    transition: opacity .3s linear,height 0s ease .3s;
+    pointer-events: none;
+  }
+
+  .mobileWrapper {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .mobileContent {
+    position: relative;
+    z-index: 1;
+    overflow: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .mobileBody {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: 100%;
+  }
+
+  .mobileDrawerBody {
+    flex-grow: 1;
+    padding: 24px;
+    overflow: auto;
+    font-size: 14px;
+    line-height: 1.5715;
+    word-wrap: break-word;
+  }
 
   .siderFixed {
     position: fixed;
@@ -13,7 +72,6 @@
     overflow: auto;
     overflow-x: hidden;
     box-shadow: 2px 0 8px 0 rgba(29,35,41,.05);
-    display: none;
 
     .siderBar {
       display: flex;
@@ -95,6 +153,47 @@
         padding: 0 16px;
         background: #fff;
         box-shadow: 0 1px 4px rgba(0,21,41,.08);
+        
+        .mobileLogo {
+          position: relative;
+          overflow: hidden;
+
+          a {
+            display: flex;
+            align-items: center;
+            height: 100%;
+
+            img {
+              height: 40px;
+            }
+          }
+        }
+
+        .mobileLogo > * {
+          height: 100%;
+        }
+
+        .mobileButton {
+          display: flex;
+          align-items: center;
+          margin-left: 10px;
+          font-size: 20px;
+
+          .mobileTrigger {
+            display: inline-block;
+            font-size: 20px;
+            color: inherit;
+            font-style: normal;
+            line-height: 0;
+            text-align: center;
+            text-transform: none;
+            vertical-align: -.125em;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+          
+          }
+        }
 
         .headerBarRight {
           display: flex;
@@ -102,7 +201,7 @@
           height: 100%;
           margin-left: auto;
           overflow: hidden;
-        }
+        }        
       }
 
       .headerContent {
@@ -151,6 +250,7 @@
           text-align: center;
           text-transform: none;
           vertical-align: -.125em;
+          padding: 0 5px 0 5px;
           text-rendering: optimizeLegibility;
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
