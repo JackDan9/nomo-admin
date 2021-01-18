@@ -11,7 +11,7 @@ import { BarProps } from './data.d';
 
 const Bar: React.FC<BarProps> = (props) => {
 
-  const { height, id } = props;
+  const { height, id, chartOptionData } = props;
 
   const [autoHideXLabels, setAutoHideXLabels] = useState(false);
 
@@ -46,11 +46,18 @@ const Bar: React.FC<BarProps> = (props) => {
     node = n;
   });
 
-  const [option, setOption] = useState({
+  /**
+   * 
+   */
+  const [option, setOption] = useState<any>({
     title: {
       show: false,
       text: '动态数据',
       subtext: '纯属虚构'
+    },
+    legend: {
+      data: [
+        {name: '最新成交'}, {name: '预购队列'}]
     },
     tooltip: {
       trigger: 'axis',
@@ -60,9 +67,6 @@ const Bar: React.FC<BarProps> = (props) => {
           backgroundColor: '#283b56'
         }
       }
-    },
-    legend: {
-      data: ['最新成交价', '预购队列']
     },
     toolbox: {
       show: false,
@@ -140,9 +144,9 @@ const Bar: React.FC<BarProps> = (props) => {
         })()
       },
       {
-        name: '最新成交价',
+        name: '最新成交',
         type: 'line',
-        color: '',
+        color: 'blue',
         data: (function () {
           let res: any = [];
           let len: any = 0;
@@ -158,9 +162,20 @@ const Bar: React.FC<BarProps> = (props) => {
 
   let app: any = {};
   app.count = 11;
+  
+  option.title = chartOptionData.title;
+  option.legend = chartOptionData.legend;
+  option.tooltip = chartOptionData.tooltip;
+  option.toolbox = chartOptionData.toolbox;
+  option.dataZoom = chartOptionData.dataZoom;
+  option.xAxis = chartOptionData.xAxis;
+  option.yAxis = chartOptionData.yAxis;
+  option.series = chartOptionData.series;
+
   useEffect(() => {
     let chartDom: any = document.getElementById(id);
     let myChart: any = echarts.init(chartDom);
+
     setInterval(function () {
       let axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
 

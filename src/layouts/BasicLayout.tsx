@@ -488,7 +488,6 @@ const BasicLayout: React.FC = (props) => {
             />
           )
         }
-        
       </Layout>
     </Layout>
   )
