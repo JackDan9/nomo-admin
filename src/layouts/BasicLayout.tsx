@@ -279,6 +279,7 @@ const BasicLayout: React.FC = (props) => {
       {isMobile ?
         (
           <div style={mobileCollapse ? {
+            position: 'fixed',
             width: '0',
             overflow: 'hidden',
             flex: '0 0 0',
@@ -286,6 +287,7 @@ const BasicLayout: React.FC = (props) => {
             minWidth: '0',
             transition: 'background-color 0.3s ease 0s, min-width 0.3s ease 0s, max-width 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) 0s'
           } : {
+              position: 'fixed',
               width: '210px',
               overflow: 'hidden',
               flex: '0 0 210px',
@@ -477,12 +479,16 @@ const BasicLayout: React.FC = (props) => {
             </div>
           </footer>
         </footer>
-
-        <BackTop
-          style={{ right: '50px' }}
-          // target={() => document.getElementById("layoutMain")}
-          visibilityHeight={600}
-        />
+        
+        {isMobile ? null: (
+            <BackTop
+              style={{ right: '50px' }}
+              // target={() => document.getElementById("layoutMain")}
+              visibilityHeight={600}
+            />
+          )
+        }
+        
       </Layout>
     </Layout>
   )
