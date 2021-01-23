@@ -69,6 +69,10 @@ export default {
         {
           id: 6,
           name: 'account'
+        },
+        {
+          id: 7,
+          name: 'business'
         }
       ]
     } else if (token === 'ecfe1e6b-cba6-dfee-fdba-12015b7f2420') {
@@ -109,6 +113,10 @@ export default {
         {
           id: 6,
           name: 'account'
+        },
+        {
+          id: 7,
+          name: 'business'
         }
       ]
     }

@@ -20,8 +20,8 @@ module.exports = merge(baseWebpackConfig, {
   mode: 'production',
   output: {
     path: resolve('dist'),
-    filename: 'js/[name].[contenthash:12].js',
-    chunkFilename: 'js/[name].[contenthash:12].js'
+    filename: 'js/[name].[contenthash:6].js',
+    chunkFilename: 'js/[name].[contenthash:6].js'
   },
   plugins: [
     new MiniCssExtractPlugin({

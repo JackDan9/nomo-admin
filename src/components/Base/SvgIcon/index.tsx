@@ -5,17 +5,20 @@ import { tupleStr } from '@/utils/tuple';
 import Dashboard from '@/assets/icons/dashboard.svg';
 import Account from '@/assets/icons/account.svg';
 import Fly from '@/assets/icons/fly.svg';
+import Chart from '@/assets/icons/chart.svg';
 
 const ICON_NAME_MAP = {
   dashboard: Dashboard,
   account: Account,
-  fly: Fly
+  fly: Fly,
+  chart: Chart
 }
 
 const iconNames = tupleStr(
   'dashboard',
   'account',
-  'fly'
+  'fly',
+  'chart'
 )
 
 export type IconName = typeof iconNames[number];

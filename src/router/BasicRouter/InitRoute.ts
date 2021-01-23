@@ -3,8 +3,9 @@ import CommonRoute from './CommonRoute';
 import accountRoute from './modules/account';
 import dashboardRoute from './modules/dashboard';
 import orderRoute from './modules/order';
+import businessRoute from './modules/business';
 
-const routeMap = [dashboardRoute, accountRoute, orderRoute];
+const routeMap = [dashboardRoute, accountRoute, orderRoute, businessRoute];
 
 // 根据路由名称获取可访问的路由表
 const filterRouteMap = (routeNames: string[], routeMap: CommonRoute[]) => {

@@ -51,6 +51,10 @@ const Login: React.FC = () => {
         {
           id: 6,
           name: 'account'
+        },
+        {
+          id: 7,
+          name: 'business'
         }
       ]
     }
@@ -70,6 +74,10 @@ const Login: React.FC = () => {
         {
           id: 6,
           name: 'account'
+        },
+        {
+          id: 7,
+          name: 'business'
         }
       ]
     }
