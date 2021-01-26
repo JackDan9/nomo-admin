@@ -5,7 +5,7 @@ import { GridContent } from '@ant-design/pro-layout';
 import style from './index.less';
 
 
-class Picture extends PureComponent<{}> {
+class Level extends PureComponent<{}> {
   constructor(props) {
     super(props)
   }
@@ -13,10 +13,10 @@ class Picture extends PureComponent<{}> {
   render() {
     return (
       <GridContent>
-        <div>Picture</div>
+        <div>Level</div>
       </GridContent>
     )
   }
 }
 
-export default Picture;
+export default Level;

@@ -13,7 +13,7 @@ const BusinessPicture = lazy(
 const route: CommonRoute = {
   name: 'business',
   title: '经营图',
-  icon: 'chart',
+  icon: 'business',
   path: '/business',
   children: [
     {

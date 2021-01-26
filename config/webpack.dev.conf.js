@@ -14,7 +14,7 @@ module.exports = merge(baseWebpackConfig, {
     contentBase: path.resolve(__dirname, '../dist'),
     compress: true,
     host: 'localhost',
-    port: 8088,
+    port: 8888,
     open: true,
     hot: true,
     overlay: true
