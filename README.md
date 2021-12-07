@@ -39,7 +39,7 @@ A project for nomo admin!
 
 ## Project Catalog --- 项目目录
 
-```javascript
+```
 ├── config
 ├── docs
 ├── mock
