@@ -37,4 +37,32 @@ A project for nomo admin!
 [root@localhost nomo-admin]# npm run start
 ```
 
+## Project Catalog --- 项目目录
+
+```javascript
+├── config
+├── docs
+├── mock
+├── public
+├── src
+│   ├── components
+│   │   ├── AsideNav
+│   │   │   ├── __tests__
+│   │   │   │   ├── index.test.tsx 组件AsideNav测试文件
+│   │   │   ├── index.tsx 组件AsideNav主文件
+│   │   │   ├── index.less 组件AsideNav样式文件
+│   │   │   ├── getMenu.ts 
+│   ├── pages
+│   │   ├── index.tsx
+│   │   ├── index.less
+│   │   ├── page.global.less 
+├── static
+├── .babelrc Babel配置说明文档
+├── .gitignore 
+├── LICENSE
+├── package.json
+├── README.md 说明文档
+├── tsconfig
+├── tslint.json
+```
 
