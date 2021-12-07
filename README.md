@@ -58,8 +58,8 @@ A project for nomo admin!
 │   │   ├── page.global.less 
 ├── static
 ├── .babelrc Babel配置说明文档
-├── .gitignore 
-├── LICENSE
+├── .gitignore git过滤不会提交的文件和文件夹
+├── LICENSE 项目LICENSE
 ├── package.json
 ├── README.md 说明文档
 ├── tsconfig
