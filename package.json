@@ -6,6 +6,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config ./config/webpack.prod.conf.js",
     "start": "cross-env NODE_ENV=development webpack-dev-server --config ./config/webpack.dev.conf.js",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./config/webpack.dev.conf.js",
     "test": "echo \" no test \" && exit 1"
   },
   "repository": "git@github.com:JackDan9/nomo-admin.git",

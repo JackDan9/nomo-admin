@@ -1,2 +1,31 @@
+# dependencies
 node_modules
 report.*
+dist/
+
+# github
+/.github
+.github
+
+# misc
+.DS_Store
+npm-debug.log*
+yarn-error.log
+
+# lock file
+yarn.lock
+package-lock.json
+
+# jetbrains
+.idea
+
+# visual studio code
+/.vscode
+.vscode
+*.log
+.history
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.local
