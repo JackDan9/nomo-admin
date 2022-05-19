@@ -68,3 +68,12 @@ A project for nomo admin!
 
 
 ## Project Function-项目功能结构
+
+- [X] 单点登录
+- [X] 权限认证(路由级别权限)
+- [] 权限(按钮级别)
+
+
+------
+
+> Thinking in JackDan
