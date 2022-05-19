@@ -5,8 +5,10 @@ import dashboardRoute from './modules/dashboard';
 import orderRoute from './modules/order';
 import businessRoute from './modules/business';
 import brandRoute from './modules/brand';
+import recuriteRoute from './modules/recurite';
+import newsRoute from './modules/news';
 
-const routeMap = [dashboardRoute, accountRoute, orderRoute, businessRoute, brandRoute];
+const routeMap = [dashboardRoute, accountRoute, orderRoute, businessRoute, brandRoute, recuriteRoute, newsRoute];
 
 // 根据路由名称获取可访问的路由表
 const filterRouteMap = (routeNames: string[], routeMap: CommonRoute[]) => {

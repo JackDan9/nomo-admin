@@ -81,7 +81,13 @@ module.exports = merge(baseWebpackConfig, {
           'css-loader',
           {
             loader: 'less-loader',
-            options: { javascriptEnabled: true }
+            // options: { javascriptEnabled: true } less-loader 5.0.0的配置
+            // less-loader 6.0.0x 6.0.0以后的版本
+            options: {
+              lessOptions: {
+                javascriptEnabled: true
+              }
+            }
           },
           // {
           //   loader: 'sass-resources-loader',

@@ -43,7 +43,7 @@ const Ticket = () => {
 
   const getUserList = async () => {
     setLoading(true)
-    // const res = await service.getUserList(params)
+    // const res1 = await service.getUserList(params)
     const res = {
       list: [
         {

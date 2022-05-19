@@ -1,9 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom'
 import { Form, Input, Button, Checkbox } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { UserOutlined, LockOutlined, SettingOutlined, SnippetsOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { UserInfo } from '@/store/model/user-info'
-import request from '@/utils/request';
 import userStore from '@/store/user';
 
 import DefaultSettings from '@/config/defaultSettings';
@@ -16,88 +15,20 @@ const Login: React.FC = () => {
     const data = await service.login(values);
 
     const token = data.token;
-    request.setHeader({ Authorization: token });
     userStore.setToken(token);
-    
-    const userInfo: UserInfo = {
-      companyid: data.companyid,
-      nickname: data.nickname,
-      openid: data.openid,
-      uid: data.uid,
-      username: data.username,
-      permission: [
-        {
-          id: 1,
-          name: 'dashboard',
-          description: '首页',
-          reminder: '您没有权限访问首页'
-        },
-        {
-          id: 2,
-          name: 'chart'
-        },
-        {
-          id: 3,
-          name: 'article'
-        },
-        {
-          id: 4,
-          name: 'blank'
-        },
-        {
-          id: 5,
-          name: 'form'
-        },
-        {
-          id: 6,
-          name: 'account'
-        },
-        {
-          id: 7,
-          name: 'business'
-        },
-        {
-          id: 8,
-          name: 'brand'
-        }
-      ]
+    console.log("userStore.token: ",userStore.token);
+    if(userStore.token) {
+      history.replace('/dashboard');
+    } else {
+      history.replace('/user/login');
     }
-
-    if (data['roleid'] > 3) {
-      userInfo.permission = [
-        {
-          id: 1,
-          name: 'dashboard',
-          description: '首页',
-          reminder: '您没有权限访问首页'
-        },
-        {
-          id: 5,
-          name: 'order'
-        },
-        {
-          id: 6,
-          name: 'account'
-        },
-        {
-          id: 7,
-          name: 'business'
-        },
-        {
-          id: 8,
-          name: 'brand'
-        }
-      ]
-    }
-    userStore.setUserInfo(userInfo);
-    history.replace('/dashboard');
   };
 
   return (
     <div className={styles.loginContainer}>
       <div className={styles.loginName}>
         <div className={styles.loginNameZh}>{DefaultSettings.chineseName}</div>
-        <div className={styles.loginNameEn}>{DefaultSettings.englishName}</div>
+        {/* <div className={styles.loginNameEn}>管理员</div> */}
       </div>
       <Form
         name="normal_login"
@@ -105,12 +36,24 @@ const Login: React.FC = () => {
         initialValues={{ remember: true }}
         onFinish={onFinish}
       >
+        {/* <Form.Item
+          name="usernumber"
+          rules={[{ required: true, message: '请输入学号!' }]}
+        >
+          <Input className={styles.siteFormItemInput} prefix={<SettingOutlined className={styles.siteFormItemIcon} />} placeholder="请输入学号" />
+        </Form.Item> */}
         <Form.Item
           name="username"
           rules={[{ required: true, message: '请输入用户名!' }]}
         >
-          <Input className={styles.siteFormItemInput} prefix={<UserOutlined className={styles.siteFormItemIcon} />} placeholder="用户名" />
+          <Input className={styles.siteFormItemInput} prefix={<UserOutlined className={styles.siteFormItemIcon} />} placeholder="请输入用户名" />
         </Form.Item>
+        {/* <Form.Item
+          name="email"
+          rules={[{ required: true, message: '请输入邮箱!' }]}
+        >
+          <Input className={styles.siteFormItemInput} prefix={<SnippetsOutlined className={styles.siteFormItemIcon} />} placeholder="请输入邮箱" />
+        </Form.Item> */}
         <Form.Item
           name="password"
           rules={[{ required: true, message: '请输入密码!' }]}
@@ -119,9 +62,20 @@ const Login: React.FC = () => {
             className={styles.siteFormItemInput}
             prefix={<LockOutlined className={styles.siteFormItemIcon} />}
             type="password"
-            placeholder="密码"
+            placeholder="请输入新密码"
           />
         </Form.Item>
+        {/* <Form.Item
+          name="password"
+          rules={[{ required: true, message: '请再次确认密码!' }]}
+        >
+          <Input
+            className={styles.siteFormItemInput}
+            prefix={<MenuUnfoldOutlined className={styles.siteFormItemIcon} />}
+            type="password"
+            placeholder="再次确认新密码"
+          />
+        </Form.Item> */}
         <Form.Item>
           <Button type="primary" htmlType="submit" className={styles.loginFromButton}>
             登录
@@ -132,10 +86,13 @@ const Login: React.FC = () => {
           {/* <Form.Item name="remember" valuePropName="checked" noStyle>
             <Checkbox>记住我</Checkbox>
           </Form.Item> */}
+          {/* <a className={styles.register} href="/user/register">
+            立即登录
+          </a> */}
 
-          <a className={styles.loginFromForgot} href="">
+          {/* <a className={styles.loginFromForgot} href="">
             忘记密码 ?
-          </a>
+          </a> */}
         </Form.Item>
       </Form>
     </div>

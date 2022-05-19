@@ -4,6 +4,52 @@
   min-height: 0;
   position: relative;
   margin: 24px;
+  .treeMenu {
+    position: relative;
+    width: 260px;
+    flex: 0 0 260px;
+    // height: 100%;
+    // background-color: #fbfbfb;
+    border-right: 1px solid #e9eaf2;
+    min-width: 0;
+    .searchContainer {
+      // width: 80%;
+      // margin: 0 auto;
+      // margin: 20px;
+      // margin-right: 30px;
+    }
+  }
+  .tableContainer {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    position: relative;
+    width: 1%;
+    height: 100%;
+    padding: 0;
+    transform-origin: right;
+    border-left: none;
+
+    .collapse {
+      position: absolute;
+      top: 32px;
+      left: -19px;
+      z-index: 999;
+      width: 19px;
+      height: 32px;
+      line-height: 28px;
+      text-align: center;
+      border: 1px solid #dee0e3;
+      border-radius: 4px;
+      // background-color: White;
+      border-right: none;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      cursor: pointer;
+      padding: 0;
+      margin: 0;
+    }
+  }
   .dashboardBar {
     // padding: 0 0 0 -32px;
     padding-left: -32px;

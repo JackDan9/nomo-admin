@@ -12,24 +12,24 @@ const BusinessPicture = lazy(
 
 const route: CommonRoute = {
   name: 'business',
-  title: '经营图',
+  title: '读者管理',
   icon: 'business',
   path: '/business',
   children: [
     {
       name: 'picture',
-      title: '经营图视',
+      title: '读者管理',
       path: '/business/picture',
       exact: true,
       component: BusinessPicture
     },
-    {
-      name: 'plan',
-      title: '方案制作',
-      path: '/business/plan',
-      exact: true,
-      component: BusinessPlan
-    }
+    // {
+    //   name: 'plan',
+    //   title: '方案制作',
+    //   path: '/business/plan',
+    //   exact: true,
+    //   component: BusinessPlan
+    // }
   ]
 }
 

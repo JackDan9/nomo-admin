@@ -28,5 +28,7 @@ export interface UserInfo {
   // 手机号
   phone?: string
   permission: Permission[]
+  authorityRouter?: any
+  permissionButton?: any
 }
 

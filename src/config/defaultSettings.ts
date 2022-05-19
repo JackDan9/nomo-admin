@@ -28,6 +28,6 @@ export default {
   logo: logoSvg,
   chineseName: '管理平台',
   englishName: 'Admin Manage',
-  title: 'Admin Manage',
+  title: '管理平台',
   userLayoutBg: loginBg
 } as DefaultSettings;

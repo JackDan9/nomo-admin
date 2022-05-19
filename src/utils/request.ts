@@ -32,7 +32,9 @@ const codeMessage = {
 export class HttpRequest {
   private baseConfig: AxiosRequestConfig = {
     baseURL: config.domain,
-    headers: {},
+    headers: {
+      "Authorization": "Bearer" + sessionStorage.getItem("token")
+    },
     // withCredentials: true,
     timeout: 8000,
   }
@@ -116,8 +118,8 @@ export class HttpRequest {
   private setResponseInterceptors = () => {
     this.instance.interceptors.response.use(
       (response) => {
-        const { code, result, msg } = response.data
-        if (code === 0) {
+        const { code, result, msg, status } = response.data
+        if (code === 0 || code === 200 || status === 200) {
           return result;
         } else {
           notification.error({

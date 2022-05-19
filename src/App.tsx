@@ -23,7 +23,6 @@ const App: React.FC = () => {
              */}
           <Route path="/" component={BasicLayout} />
         </Switch>
-        
       </React.Suspense>
     </Router>
   )

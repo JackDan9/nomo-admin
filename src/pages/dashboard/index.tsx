@@ -1,13 +1,19 @@
+/**
+ * @Description 首页
+ * @Author JackDan
+ * @Date 2022-05-19 
+ */
 import React, { Component, Suspense } from 'react';
 import StandardTable from '@/components/StandardTable';
 
-
 import styles from "./index.less";
 import { GridContent } from '@ant-design/pro-layout';
-import { Card, Row, Tabs, Col } from 'antd';
+import { Card, Row, Tabs, Col, Tree, Input, Button, Table } from 'antd';
 import Bar from '@/components/Charts/Bar';
 import Pie from '@/components/Charts/Pie';
 import Line from '@/components/Charts/Line';
+import { MenuFoldOutlined, MenuUnfoldOutlined, SearchOutlined } from '@ant-design/icons';
+import DASHBOARD_CONSTANT from './constant';
 
 const { TabPane } = Tabs
 
@@ -130,11 +136,176 @@ const barData = {
   ],
 }
 
-class Dashboard extends Component {
+class Dashboard extends Component<any, any> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      collapsed: false,
+      columns: [],
+      dataSource: [],
+      dashboardTreeData: [
+        {
+          title: "GMV",
+          key: 'gmv',
+          children: [{
+            title: "UV",
+            key: 'uv',
+            disabled: true
+          }, {
+            title: "APRU",
+            key: 'apru',
+            children: [{
+              title: "TC",
+              key: "tc",
+              children: [{
+                title: "CVR",
+                key: "cvr",
+                disabled: true,
+              }, {
+                title: "Freq.",
+                key: "freq.",
+                disabled: true,
+              }]
+            }, {
+              title: "TA",
+              key: "ta",
+              children: [{
+                title: "PPS",
+                key: "pps",
+                disabled: true,
+              }, {
+                title: "Party Size",
+                key: "party_size",
+                disabled: true,
+              }]
+            }]
+          }]
+        }
+      ],
+      complexColumns: [],
+      complexDataSource: []
+    }
+  }
+
+  componentDidMount() {
+    this.setState({
+      columns: [{
+        title: "实验名称",
+        key: "name",
+        dataIndex: "name",
+        fixed: "left",
+        width: 120
+      }, {
+        title: "GMV",
+        key: "gmv",
+        dataIndex: "gmv",
+      }, {
+        title: "UV",
+        key: "uv",
+        dataIndex: "uv"
+      }, {
+        title: "ARPU",
+        key: "arpu",
+        dataIndex: "arpu"
+      }],
+      dataSource: [
+        {
+          name: "基线",
+          gmv: 120,
+          uv: 20,
+          arpu: 6
+        },
+        {
+          name: "本实验",
+          gmv: 160,
+          uv: 10,
+          arpu: 16
+        }
+      ],
+      complexColumns: DASHBOARD_CONSTANT["complexDashboardColumns"],
+      complexDataSource: DASHBOARD_CONSTANT["complexDashboardDataSource"],
+    })
+  }
+
+  toggleCollapsed = () => {
+    this.setState({
+      collapse: !this.state.collapse
+    })
+  }
+
+  handleSelectNode = (selectedKeys, e) => {
+    const selectedKey = selectedKeys && selectedKeys[0];
+    const isChildren = e && e.selectedNodes && e.selectedNodes[0].children && e.selectedNodes[0].children.length > 0;
+    if(selectedKey && isChildren) {
+      console.log(selectedKey + 'DashboardColumns');
+      this.setState({
+        columns: DASHBOARD_CONSTANT[selectedKey + 'DashboardColumns'],
+        dataSource: DASHBOARD_CONSTANT[selectedKey + 'DashboardDataSource'],
+      })
+    }
+  }
+
+  handleChangeTab = () => {
+    
+  }
+
   render() {
     return (
       <div className={styles.dashboardContainer}>
         <GridContent>
+          <Tabs defaultActiveKey='tree' onChange={this.handleChangeTab}>
+            <TabPane tab="树形式" key="tree">
+            <Card>
+            <Row gutter={24}>
+              <div className={styles.treeMenu} style={{display: this.state.collapse ? "none" : "block"}}>
+                <Input className={styles.searchContainer} placeholder='请输入内容' prefix={<SearchOutlined />} />
+                <Tree
+                  showIcon
+                  showLine
+                  defaultExpandAll={false}
+                  onSelect={(selectedKeys, e) => this.handleSelectNode(selectedKeys, e)}
+                  treeData={this.state.dashboardTreeData}
+                  defaultExpandedKeys={["gmv"]}
+                  multiple={false}
+                />
+              </div>
+              <div className={styles.tableContainer}>
+                <div>
+                  <StandardTable
+                    columns={this.state.columns}
+                    dataSource={this.state.dataSource}
+                    border={this.state.collapse}
+                    key="id"
+                    scroll={{x: 1000}}
+                    pagination={false}
+                  />
+                </div>
+                <Button 
+                  className={styles.collapse} 
+                  type="primary" 
+                  onClick={this.toggleCollapsed}
+                  style={{left: this.state.collapse ? 0 : -19, transform: this.state.collapse ? "rotate(180deg)" : "unset"}}>
+                  {this.state.collapse ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                </Button>
+              </div>
+            </Row>
+          </Card>
+            </TabPane>
+            <TabPane tab="表头形式" key="column">
+            <Card>
+              <Row gutter={24}>
+                <Table
+                  columns={this.state.complexColumns}
+                  dataSource={this.state.complexDataSource}
+                  bordered
+                  pagination={false}
+                  key="id"
+                  scroll={{ x: 'calc(700px + 50%)', y: 240 }}
+                />
+              </Row>
+            </Card>
+            </TabPane>
+          </Tabs>
           <React.Fragment>
             <Row
               gutter={24}

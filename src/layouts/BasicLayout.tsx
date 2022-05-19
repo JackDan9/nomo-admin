@@ -8,7 +8,7 @@ import InitRoute from '@/router/BasicRouter/InitRoute';
 import UserStore from '@/store/user';
 // import HeaderBar from '@/components/HeaderBar';
 // import SiderBar from '@/components/SiderBar';
-// import service from './service'
+import service from './service'
 // import Tab from '@/store/tab';
 import styles from './BasicLayout.less'
 
@@ -65,17 +65,62 @@ const BasicLayout: React.FC = (props) => {
       history.replace('/user/login')
     } else {
       const userInfo = UserStore.userInfo
-      setRouteMap(InitRoute(userInfo.permission))
-      // service.getUserInfo({ token }).then((res) => {
-      //   UserStore.setUserInfo(res)
-      //   setRouteMap(InitRoute(res.permission))
-      // })
-      if (location.pathname !== '/dashboard') {
-        setActiveKey('/dashboard');
-        history.push('/dashboard');
+      if (userInfo && userInfo.authorityRouter && userInfo.authorityRouter.split(",").length > 0) {
+        const initRoute: any = [];
+        userInfo && userInfo.authorityRouter && userInfo.authorityRouter.split(",").map((authorityRouterItem, authorityRouterIndex) => {
+          if (authorityRouterItem === "dashboard") {
+            initRoute.push({
+              id: authorityRouterIndex + 1,
+              name: authorityRouterItem,
+              description: '首页',
+              reminder: '您没有权限访问首页'
+            })
+          } else {
+            initRoute.push({
+              id: authorityRouterIndex + 1,
+              name: authorityRouterItem
+            })
+          }
+        });
+
+        setRouteMap(InitRoute(initRoute));
       } else {
-        setActiveKey(location.pathname)
+        // token是
+        service.getUserInfo({}).then((res) => {
+          const initRoute: any = [];
+
+          if (res) {
+            res && res.authorityRouter && res.authorityRouter.split(",").map((authorityRouterItem, authorityRouterIndex) => {
+              if (authorityRouterItem === "dashboard") {
+                initRoute.push({
+                  id: authorityRouterIndex + 1,
+                  name: authorityRouterItem,
+                  description: '首页',
+                  reminder: '您没有权限访问首页'
+                })
+              } else {
+                initRoute.push({
+                  id: authorityRouterIndex + 1,
+                  name: authorityRouterItem
+                })
+              }
+            });
+            res.permission = initRoute;
+            UserStore.setUserInfo(res);
+
+            setRouteMap(InitRoute(initRoute));
+          }
+        });
+
+        setActiveKey(location.pathname);
       }
+      // 以前会自动刷新到dashboard，非dashboard刷新到dashboard
+      // if (location.pathname !== '/dashboard') {
+      //   setActiveKey('/dashboard');
+      //   history.push('/dashboard');
+      // } else {
+      //   setActiveKey(location.pathname)
+      // }
     }
   }, [])
 
@@ -287,14 +332,14 @@ const BasicLayout: React.FC = (props) => {
             minWidth: '0',
             transition: 'background-color 0.3s ease 0s, min-width 0.3s ease 0s, max-width 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) 0s'
           } : {
-              position: 'fixed',
-              width: '210px',
-              overflow: 'hidden',
-              flex: '0 0 210px',
-              maxWidth: '210px',
-              minWidth: '210px',
-              transition: 'background-color 0.3s ease 0s, min-width 0.3s ease 0s, max-width 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) 0s'
-            }}>
+            position: 'fixed',
+            width: '210px',
+            overflow: 'hidden',
+            flex: '0 0 210px',
+            maxWidth: '210px',
+            minWidth: '210px',
+            transition: 'background-color 0.3s ease 0s, min-width 0.3s ease 0s, max-width 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) 0s'
+          }}>
           </div>
         ) : (
           <div style={collapse ?
@@ -319,12 +364,12 @@ const BasicLayout: React.FC = (props) => {
       {isMobile ?
         (
           <div>
-            <div className={styles.mobileDrawer} style={!mobileCollapse ? { padding: '0px', height: '100vh', width: '100%', transition: 'transform .3s cubic-bezier(.7,.3,.1,1)' } : {padding: '0px', height: '100vh'}}>
-              <div className={styles.mobileMask} style={!mobileCollapse ? { height: '100%', opacity: 1, transition: 'none', animation: 'antdDrawerFadeIn .3s cubic-bezier(.7,.3,.1,1)', pointerEvents: 'auto' } : {height: 0}} onClick={triggerMobileCollapse}></div>
-              <div className={styles.mobileWrapper} style={!mobileCollapse ? {width: '210px'} : {width: '210px', transform: 'translateX(-100%)'}}>
+            <div className={styles.mobileDrawer} style={!mobileCollapse ? { padding: '0px', height: '100vh', width: '100%', transition: 'transform .3s cubic-bezier(.7,.3,.1,1)' } : { padding: '0px', height: '100vh' }}>
+              <div className={styles.mobileMask} style={!mobileCollapse ? { height: '100%', opacity: 1, transition: 'none', animation: 'antdDrawerFadeIn .3s cubic-bezier(.7,.3,.1,1)', pointerEvents: 'auto' } : { height: 0 }} onClick={triggerMobileCollapse}></div>
+              <div className={styles.mobileWrapper} style={!mobileCollapse ? { width: '210px' } : { width: '210px', transform: 'translateX(-100%)' }}>
                 <div className={styles.mobileContent}>
                   <div className={styles.mobileBody}>
-                    <div className={styles.mobileDrawerBody} style={{height: '100vh', padding: '0px', display: 'flex', flexDirection: 'row'}}>
+                    <div className={styles.mobileDrawerBody} style={{ height: '100vh', padding: '0px', display: 'flex', flexDirection: 'row' }}>
                       <Layout.Sider
                         className={styles.siderFixed}
                         width={mobileCollapse ? 0 : 210}
@@ -357,8 +402,8 @@ const BasicLayout: React.FC = (props) => {
                                     collapse ? (
                                       <MenuFoldOutlined className={styles.headerBarTrigger} />
                                     ) : (
-                                        <MenuUnfoldOutlined className={styles.headerBarTrigger} />
-                                      )
+                                      <MenuUnfoldOutlined className={styles.headerBarTrigger} />
+                                    )
                                   }
                                 </Menu.Item>
                               </Menu>
@@ -388,7 +433,7 @@ const BasicLayout: React.FC = (props) => {
                     <img src={DefaultSettings.logo} alt="logo" />
                     {
                       !collapse ? (
-                        <h1>{DefaultSettings.title}</h1>
+                        <h1>{DefaultSettings.title || DefaultSettings.chineseName}</h1>
                       ) : null
                     }
 
@@ -406,8 +451,8 @@ const BasicLayout: React.FC = (props) => {
                         collapse ? (
                           <MenuFoldOutlined className={styles.headerBarTrigger} />
                         ) : (
-                            <MenuUnfoldOutlined className={styles.headerBarTrigger} />
-                          )
+                          <MenuUnfoldOutlined className={styles.headerBarTrigger} />
+                        )
                       }
                     </Menu.Item>
                   </Menu>
@@ -423,24 +468,24 @@ const BasicLayout: React.FC = (props) => {
         <div className={styles.header}>
           <div className={styles.headerBar}>
             {isMobile ? (
-                <span className={styles.mobileLogo}>
-                  <Link to="/dashboard">
-                    <img src={DefaultSettings.logo} alt="logo" />
-                  </Link>
-                </span>
-            ): null}
+              <span className={styles.mobileLogo}>
+                <Link to="/dashboard">
+                  <img src={DefaultSettings.logo} alt="logo" />
+                </Link>
+              </span>
+            ) : null}
             {isMobile ? (
               <span className={styles.mobileButton} onClick={triggerMobileCollapse}>
                 <span className={styles.mobileTrigger}>
-                {mobileCollapse ? (
-                  <MenuFoldOutlined className={styles.headerBarTrigger} />
+                  {mobileCollapse ? (
+                    <MenuFoldOutlined className={styles.headerBarTrigger} />
                   ) : (
                     <MenuUnfoldOutlined className={styles.headerBarTrigger} />
                   )
-                }
+                  }
                 </span>
               </span>
-            ):null}
+            ) : null}
             <div style={{ flex: '1 1 0%' }}></div>
             <div className={styles.headerBarRight}>
               <Avatar />
@@ -479,14 +524,14 @@ const BasicLayout: React.FC = (props) => {
             </div>
           </footer>
         </footer>
-        
-        {isMobile ? null: (
-            <BackTop
-              style={{ right: '50px' }}
-              // target={() => document.getElementById("layoutMain")}
-              visibilityHeight={600}
-            />
-          )
+
+        {isMobile ? null : (
+          <BackTop
+            style={{ right: '50px' }}
+            // target={() => document.getElementById("layoutMain")}
+            visibilityHeight={600}
+          />
+        )
         }
       </Layout>
     </Layout>

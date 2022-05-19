@@ -19,8 +19,8 @@ Mock.setup({
   timeout: '300-800'
 })
 
-Mock.mock(/login/, 'post', user.login)
-Mock.mock(/userInfo/, 'get', user.getUserInfo)
+// Mock.mock(/login/, 'post', user.login)
+// Mock.mock(/userInfo/, 'get', user.getUserInfo)
 
 Mock.mock(/\/base/, 'get', base.getBase)
 

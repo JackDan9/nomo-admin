@@ -5,6 +5,7 @@ import { UserOutlined, SettingOutlined, LogoutOutlined } from '@ant-design/icons
 import UserStore from '@/store/user'
 import styles from './index.less'
 
+
 const AvatarMenu: React.FC = () => {
   const history = useHistory()
 
@@ -44,7 +45,7 @@ const AvatarMenu: React.FC = () => {
     <Dropdown overlay={getMenuList}>
       <div className={styles.headerBarAvatar}>
         <Avatar src={UserStore.userInfo.avatar} />
-        <div className={styles.username}>{UserStore.userInfo.username}</div>
+        <div className={styles.username}>{UserStore.userInfo.username || UserStore.userInfo.name}</div>
       </div>
     </Dropdown>
   )

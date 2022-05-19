@@ -1,5 +1,11 @@
+/**
+ * @Description 用户登录token信息和用户信息
+ * @Author JackDan
+ * @Date 2022-05-19
+ */
 import { observable, action } from 'mobx';
 import { UserInfo } from '@/store/model/user-info';
+import Cookie from 'js-cookie';
 
 class User {
   // token

@@ -9,7 +9,8 @@ const CONFIG_BASE = {
 
 // DEVELOPMENT configuration
 const CONFIG_DEV = {
-  domain: 'http://c.bu86.com/api',
+  // domain: 'http://c.bu86.com/api',
+  domain: 'http://127.0.0.1:7001',
 }
 
 

@@ -21,16 +21,20 @@ const userInfo = Mock.mock({
 export default {
   login(config: Config) {
     const user = JSON.parse(config.body)
-    if (user.params.username === 'editor') {
+    console.log("user", user);
+    // if (user.params.username === 'editor') {
+    //   loginData.token = 'd02fd62b-cfdf-9efb-adfb-7fc1e85bf99c'
+    // } else if (user.params.username === 'guest') {
+    //   loginData.token = 'ecfe1e6b-cba6-dfee-fdba-12015b7f2420'
+    // } else {
+    //   loginData.token = '6f81bbab-5b7e-abfb-bd44-efd5aeee82cc'
+    // }
+    if(user.username === 'admin') {
       loginData.token = 'd02fd62b-cfdf-9efb-adfb-7fc1e85bf99c'
-    } else if (user.params.username === 'guest') {
-      loginData.token = 'ecfe1e6b-cba6-dfee-fdba-12015b7f2420'
-    } else {
-      loginData.token = '6f81bbab-5b7e-abfb-bd44-efd5aeee82cc'
     }
     return {
       code: 200,
-      data: loginData
+      result: loginData
     }
   },
   logout() {

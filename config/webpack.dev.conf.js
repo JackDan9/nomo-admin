@@ -15,7 +15,7 @@ module.exports = merge(baseWebpackConfig, {
     compress: true,
     host: 'localhost',
     port: 8888,
-    open: true,
+    open: false,
     hot: true,
     overlay: true
   },
