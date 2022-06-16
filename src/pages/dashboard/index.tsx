@@ -213,13 +213,15 @@ class Dashboard extends Component<any, any> {
           name: "基线",
           gmv: 120,
           uv: 20,
-          arpu: 6
+          arpu: 6,
+          id: 9,
         },
         {
           name: "本实验",
           gmv: 160,
           uv: 10,
-          arpu: 16
+          arpu: 16,
+          id: 10
         }
       ],
       complexColumns: DASHBOARD_CONSTANT["complexDashboardColumns"],
@@ -237,11 +239,12 @@ class Dashboard extends Component<any, any> {
     const selectedKey = selectedKeys && selectedKeys[0];
     const isChildren = e && e.selectedNodes && e.selectedNodes[0].children && e.selectedNodes[0].children.length > 0;
     if(selectedKey && isChildren) {
-      console.log(selectedKey + 'DashboardColumns');
+  
       this.setState({
         columns: DASHBOARD_CONSTANT[selectedKey + 'DashboardColumns'],
         dataSource: DASHBOARD_CONSTANT[selectedKey + 'DashboardDataSource'],
       })
+
     }
   }
 
@@ -294,10 +297,10 @@ class Dashboard extends Component<any, any> {
             <TabPane tab="表头形式" key="column">
             <Card>
               <Row gutter={24}>
-                <Table
+                <StandardTable
                   columns={this.state.complexColumns}
                   dataSource={this.state.complexDataSource}
-                  bordered
+                  border={true}
                   pagination={false}
                   key="id"
                   scroll={{ x: 'calc(700px + 50%)', y: 240 }}

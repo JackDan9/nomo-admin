@@ -45,13 +45,15 @@ gmvDashboardDataSource: [
     name: "基线",
     gmv: 120,
     uv: 20,
-    arpu: 6
+    arpu: 6,
+    id: 1,
   },
   {
     name: "本实验",
     gmv: 160,
     uv: 10,
-    arpu: 16
+    arpu: 16,
+    id: 2,
   }
 ],
 apruDashboardDataSource: [
@@ -59,13 +61,15 @@ apruDashboardDataSource: [
     name: "基线",
     arpu: 6,
     tc: 2,
-    ta: 3
+    ta: 3,
+    id: 5,
   },
   {
     name: "本实验",
     arpu: 16,
     tc: 4,
-    ta: 4
+    ta: 4,
+    id: 4,
   }
 ],
 tcDashboardColumns: [
@@ -97,13 +101,15 @@ tcDashboardDataSource: [
     name: "基线",
     tc: 2,
     cvr: 40,
-    freq: 5
+    freq: 5,
+    id: 6,
   },
   {
     name: "本实验",
     tc: 4,
     cvr: 50,
-    freq: 8
+    freq: 8,
+    id: 8,
   }
 ],
 taDashboardColumns: [
@@ -135,13 +141,15 @@ taDashboardDataSource: [
     name: "基线",
     ta: 3,
     pps: 40,
-    party_size: 5
+    party_size: 5,
+    id: 13,
   },
   {
     name: "本实验",
     ta: 4,
     pps: 50,
-    party_size: 8
+    party_size: 8,
+    id: 14,
   }
 ],
 complexDashboardColumns: [
@@ -266,6 +274,7 @@ complexDashboardColumns: [
     freq: 60,
     pps: 600,
     party_size: 1000,
+    id: 15,
   },{
     name: '本实验',
     gmv: 300,
@@ -277,6 +286,7 @@ complexDashboardColumns: [
     freq: 60000,
     pps: 800,
     party_size: 1000,
+    id: 16,
   }]
 }
 

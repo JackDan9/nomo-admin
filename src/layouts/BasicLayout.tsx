@@ -86,7 +86,7 @@ const BasicLayout: React.FC = (props) => {
         setRouteMap(InitRoute(initRoute));
       } else {
         // token是
-        service.getUserInfo({}).then((res) => {
+        service.getUserInfo({token: token}).then((res) => {
           const initRoute: any = [];
 
           if (res) {

@@ -2,21 +2,26 @@ import React from 'react';
 import { useHistory } from 'react-router-dom'
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined, SettingOutlined, SnippetsOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
-import { UserInfo } from '@/store/model/user-info'
-import userStore from '@/store/user';
 
-import DefaultSettings from '@/config/defaultSettings';
-import styles from './index.less';
 import service from './service';
+import userStore from '@/store/user';
+import DefaultSettings from '@/config/defaultSettings';
+
+import styles from './index.less';
 
 const Login: React.FC = () => {
   const history = useHistory();
+
   const onFinish = async (values) => {
     const data = await service.login(values);
 
     const token = data.token;
     userStore.setToken(token);
-    console.log("userStore.token: ",userStore.token);
+
+    /**
+     * 还有一种方式是login成功之后去getUserInfo
+     * getUserInfo成功之后去跳转到dashboard
+     */
     if(userStore.token) {
       history.replace('/dashboard');
     } else {
@@ -28,7 +33,6 @@ const Login: React.FC = () => {
     <div className={styles.loginContainer}>
       <div className={styles.loginName}>
         <div className={styles.loginNameZh}>{DefaultSettings.chineseName}</div>
-        {/* <div className={styles.loginNameEn}>管理员</div> */}
       </div>
       <Form
         name="normal_login"
@@ -36,24 +40,12 @@ const Login: React.FC = () => {
         initialValues={{ remember: true }}
         onFinish={onFinish}
       >
-        {/* <Form.Item
-          name="usernumber"
-          rules={[{ required: true, message: '请输入学号!' }]}
-        >
-          <Input className={styles.siteFormItemInput} prefix={<SettingOutlined className={styles.siteFormItemIcon} />} placeholder="请输入学号" />
-        </Form.Item> */}
         <Form.Item
           name="username"
           rules={[{ required: true, message: '请输入用户名!' }]}
         >
           <Input className={styles.siteFormItemInput} prefix={<UserOutlined className={styles.siteFormItemIcon} />} placeholder="请输入用户名" />
         </Form.Item>
-        {/* <Form.Item
-          name="email"
-          rules={[{ required: true, message: '请输入邮箱!' }]}
-        >
-          <Input className={styles.siteFormItemInput} prefix={<SnippetsOutlined className={styles.siteFormItemIcon} />} placeholder="请输入邮箱" />
-        </Form.Item> */}
         <Form.Item
           name="password"
           rules={[{ required: true, message: '请输入密码!' }]}
@@ -65,17 +57,6 @@ const Login: React.FC = () => {
             placeholder="请输入新密码"
           />
         </Form.Item>
-        {/* <Form.Item
-          name="password"
-          rules={[{ required: true, message: '请再次确认密码!' }]}
-        >
-          <Input
-            className={styles.siteFormItemInput}
-            prefix={<MenuUnfoldOutlined className={styles.siteFormItemIcon} />}
-            type="password"
-            placeholder="再次确认新密码"
-          />
-        </Form.Item> */}
         <Form.Item>
           <Button type="primary" htmlType="submit" className={styles.loginFromButton}>
             登录
