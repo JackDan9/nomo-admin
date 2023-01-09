@@ -143,7 +143,7 @@ function News({props: NewsProps}): ReactElement {
     }
   ]);
 
-  const [newsDataSource, setReccuriteDataSource] = useState<any>([]);
+  const [newsDataSource, setNewsDataSource] = useState<any>([]);
   const [newsCount, setNewsCount] = useState<number>(0);
 
   const getNewsList = async (pageNumber?:number, pageSize?:number) => {
@@ -153,7 +153,7 @@ function News({props: NewsProps}): ReactElement {
     };
     const data:any = await NEWS_API.getNewsList(params);
     console.log("data:", data);
-    setReccuriteDataSource(data && data.rows);
+    setNewsDataSource(data && data.rows);
     setNewsCount(data && data.count);
   }
 

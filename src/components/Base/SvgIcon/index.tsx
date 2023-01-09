@@ -10,6 +10,7 @@ import Business from '@/assets/icons/business.svg';
 import Brand from '@/assets/icons/brand.svg';
 import News from '@/assets/icons/news.svg';
 import Recurite from '@/assets/icons/recurite.svg';
+import Cities from '@/assets/icons/cities.svg';
 
 const ICON_NAME_MAP = {
   dashboard: Dashboard,
@@ -19,7 +20,8 @@ const ICON_NAME_MAP = {
   business: Business,
   brand: Brand,
   news: News,
-  recurite: Recurite
+  recurite: Recurite,
+  cities: Cities,
 }
 
 const iconNames = tupleStr(
@@ -30,7 +32,8 @@ const iconNames = tupleStr(
   'business',
   'brand',
   'news',
-  'recurite'
+  'recurite',
+  'cities',
 )
 
 export type IconName = typeof iconNames[number];
